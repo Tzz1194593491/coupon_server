@@ -72,14 +72,12 @@ coupon_server_2024-08-07T07_29_21.978Z.ddb为数据库设计工具drawdb导出�
 ```mysql
 CREATE TABLE `promotion_coupon_meta`
 (
-    # 券模板主键
     `coupon_meta_no`   BIGINT NOT NULL AUTO_INCREMENT UNIQUE,
-    # 券模板类型
     `type`             INTEGER,
-    # 券模板有效创建时间
     `valid_start_time` DATETIME,
     `valid_end_time`   DATETIME,
     `status`           INTEGER,
+    `stock`            INTEGER,
     `create_time`      DATETIME,
     `update_time`      DATETIME,
     `delete_time`      DATETIME,
@@ -101,7 +99,8 @@ CREATE TABLE `promotion_coupon_record`
 
 
 CREATE INDEX `promotion_coupon_record_index_0`
-    ON `promotion_coupon_record` (`coupon_meta_no`, `user_id`)
+    ON `promotion_coupon_record` (`coupon_meta_no`, `user_id`);
+
 ```
 
 ### 3.使用docker创建一个mysql
