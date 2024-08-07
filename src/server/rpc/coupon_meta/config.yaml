@@ -1,0 +1,10 @@
+server_info:
+  name: "srv/coupon_meta"
+  host: "127.0.0.1"
+  port: "8080"
+mysql:
+  host: "127.0.0.1"
+  port: "3306"
+  db: "promotion_coupon"
+  user: "root"
+  password: "123456"
