@@ -3,7 +3,7 @@
 # 1.概述
 本模块主要用于优惠券的发放，且是一个下游模块。
 主要的职责为所有优惠券的发放、核销、查询。
-预计本系统落地后QPS至少为5w，并且需要管理优惠券完整的生命周期
+预计本系统落地后QPS为10w，并且需要管理优惠券完整的生命周期
 
 # 2.技术选型
 
@@ -64,3 +64,61 @@ RPC框架在本系统的作用：作为一个下游模块，供上游模块调�
 ### 1.数据结构ER图
 
 ![数据结构ER图.png](image/数据结构ER图.png)
+
+coupon_server_2024-08-07T07_29_21.978Z.ddb为数据库设计工具drawdb导出文件
+
+### 2.数据库DDL
+
+```mysql
+CREATE TABLE `promotion_coupon_meta`
+(
+    # 券模板主键
+    `coupon_meta_no`   BIGINT NOT NULL AUTO_INCREMENT UNIQUE,
+    # 券模板类型
+    `type`             INTEGER,
+    # 券模板有效创建时间
+    `valid_start_time` DATETIME,
+    `valid_end_time`   DATETIME,
+    `status`           INTEGER,
+    `create_time`      DATETIME,
+    `update_time`      DATETIME,
+    `delete_time`      DATETIME,
+    PRIMARY KEY (`coupon_meta_no`)
+);
+
+
+CREATE TABLE `promotion_coupon_record`
+(
+    `coupon_no`      BIGINT NOT NULL AUTO_INCREMENT UNIQUE,
+    `coupon_meta_no` BIGINT,
+    `user_id`        BIGINT,
+    `status`         INTEGER,
+    `create_time`    DATETIME,
+    `update_time`    DATETIME,
+    `delete_time`    DATETIME,
+    PRIMARY KEY (`coupon_no`)
+);
+
+
+CREATE INDEX `promotion_coupon_record_index_0`
+    ON `promotion_coupon_record` (`coupon_meta_no`, `user_id`)
+```
+
+### 3.使用docker创建一个mysql
+
+```shell
+ docker run -p 3306:3306 --name JY_mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+```
+
+## 4.功能流程
+
+
+# 使用工具
+
+Goland：https://www.jetbrains.com/go/
+
+飞书：https://www.feishu.cn
+
+数据库设计工具drawdb：https://drawdb.vercel.app/
+
+docker：https://www.docker.com/
