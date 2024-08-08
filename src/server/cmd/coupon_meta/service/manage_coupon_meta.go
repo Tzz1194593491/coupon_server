@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"github.com/Tzz1194593491/coupon_server/cmd/coupon_meta/dal/db"
+	"github.com/Tzz1194593491/coupon_server/cmd/coupon_meta/pack"
 	"github.com/Tzz1194593491/coupon_server/kitex_gen/com/tang/coupon_server/coupon_meta"
 	"github.com/Tzz1194593491/coupon_server/pkg/constants"
 	"github.com/Tzz1194593491/coupon_server/pkg/utils"
@@ -58,7 +59,7 @@ func (m *ManageCouponMeta) GetManageCouponMetaByPage(req *coupon_meta.GetCouponM
 		PageSize: int(req.BaseInfo.PageSize),
 		PageNum:  int(req.BaseInfo.PageNum),
 	}
-	_, err = db.GetCouponMetaByPage(m.ctx, pageInfo, &db.CouponMeta{
+	byPage, err := db.GetCouponMetaByPage(m.ctx, pageInfo, &db.CouponMeta{
 		CouponMetaNo:     req.CouponMetaNo,
 		CouponMetaType:   *req.Type,
 		CouponMetaStatus: *req.Status,
@@ -66,6 +67,6 @@ func (m *ManageCouponMeta) GetManageCouponMetaByPage(req *coupon_meta.GetCouponM
 	if err != nil {
 		return nil, err
 	}
-	// todo
-	return nil, nil
+	res = pack.CouponMetas(byPage)
+	return res, nil
 }

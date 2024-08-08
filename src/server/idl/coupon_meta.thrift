@@ -83,6 +83,7 @@ struct GetCouponMetaIsValidReq {
 
 struct GetCouponMetaIsValidResp {
     1: bool is_valid // 是否有效
+    255: base.BaseResp baseResp
 }
 
 // 获取券模板库存
@@ -94,6 +95,7 @@ struct GetCouponMetaStockReq {
 struct GetCouponMetaStockResp {
     1: i64 coupon_meta_no // 券模板id
     2: i32 stock // 库存信息
+    255: base.BaseResp baseResp
 }
 
 service CouponMetaService {
@@ -101,6 +103,6 @@ service CouponMetaService {
     AddCouponMetaResp AddCouponMeta(1: AddCouponMetaReq req) // 增加券模板
     DeleteCouponMetaResp deleteCouponMeta(1: DeleteCouponMetaReq req) // 删除券模板
     UpdateCouponMetaResp updateCouponMeta(1: UpdateCouponMetaReq req) // 更新券模板
-    GetCouponMetaIsValidReq getCouponMetaIsValid(1: GetCouponMetaIsValidResp res) // 判断券模板是否过期
-    GetCouponMetaStockResp getCouponMetaStock(1: GetCouponMetaStockReq res) // 获取券模板库存
+    GetCouponMetaIsValidResp getCouponMetaIsValid(1: GetCouponMetaIsValidReq req) // 判断券模板是否过期
+    GetCouponMetaStockResp getCouponMetaStock(1: GetCouponMetaStockReq req) // 获取券模板库存
 }

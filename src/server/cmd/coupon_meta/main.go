@@ -4,7 +4,7 @@ import (
 	"github.com/Tzz1194593491/coupon_server/cmd/coupon_meta/dal"
 	couponmeta "github.com/Tzz1194593491/coupon_server/kitex_gen/com/tang/coupon_server/coupon_meta/couponmetaservice"
 	"github.com/Tzz1194593491/coupon_server/pkg/constants"
-	"github.com/Tzz1194593491/coupon_server/pkg/middleware/middleware"
+	middleware2 "github.com/Tzz1194593491/coupon_server/pkg/middleware"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
 	etcd "github.com/kitex-contrib/registry-etcd"
@@ -25,15 +25,15 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	addr, err := net.ResolveTCPAddr("tcp", ip+":8889")
+	addr, err := net.ResolveTCPAddr("tcp", ip+":"+constants.CouponMetaServicePort)
 	if err != nil {
 		panic(err)
 	}
 
 	svr := couponmeta.NewServer(new(CouponMetaServiceImpl),
 		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: constants.CouponMetaServiceName}), // server name
-		server.WithMiddleware(middleware.CommonMiddleware),                                                   // middleware
-		server.WithMiddleware(middleware.ServerMiddleware),
+		server.WithMiddleware(middleware2.CommonMiddleware),                                                  // middleware
+		server.WithMiddleware(middleware2.ServerMiddleware),
 		server.WithServiceAddr(addr), // address
 		server.WithRegistry(r),       // registry
 	)

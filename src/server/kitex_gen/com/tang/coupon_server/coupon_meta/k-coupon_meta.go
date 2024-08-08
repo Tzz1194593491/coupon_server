@@ -2388,6 +2388,20 @@ func (p *GetCouponMetaIsValidResp) FastRead(buf []byte) (int, error) {
 					goto SkipFieldError
 				}
 			}
+		case 255:
+			if fieldTypeId == thrift.STRUCT {
+				l, err = p.FastReadField255(buf[offset:])
+				offset += l
+				if err != nil {
+					goto ReadFieldError
+				}
+			} else {
+				l, err = bthrift.Binary.Skip(buf[offset:], fieldTypeId)
+				offset += l
+				if err != nil {
+					goto SkipFieldError
+				}
+			}
 		default:
 			l, err = bthrift.Binary.Skip(buf[offset:], fieldTypeId)
 			offset += l
@@ -2439,6 +2453,18 @@ func (p *GetCouponMetaIsValidResp) FastReadField1(buf []byte) (int, error) {
 	return offset, nil
 }
 
+func (p *GetCouponMetaIsValidResp) FastReadField255(buf []byte) (int, error) {
+	offset := 0
+	_field := base.NewBaseResp()
+	if l, err := _field.FastRead(buf[offset:]); err != nil {
+		return offset, err
+	} else {
+		offset += l
+	}
+	p.BaseResp = _field
+	return offset, nil
+}
+
 // for compatibility
 func (p *GetCouponMetaIsValidResp) FastWrite(buf []byte) int {
 	return 0
@@ -2449,6 +2475,7 @@ func (p *GetCouponMetaIsValidResp) FastWriteNocopy(buf []byte, binaryWriter bthr
 	offset += bthrift.Binary.WriteStructBegin(buf[offset:], "GetCouponMetaIsValidResp")
 	if p != nil {
 		offset += p.fastWriteField1(buf[offset:], binaryWriter)
+		offset += p.fastWriteField255(buf[offset:], binaryWriter)
 	}
 	offset += bthrift.Binary.WriteFieldStop(buf[offset:])
 	offset += bthrift.Binary.WriteStructEnd(buf[offset:])
@@ -2460,6 +2487,7 @@ func (p *GetCouponMetaIsValidResp) BLength() int {
 	l += bthrift.Binary.StructBeginLength("GetCouponMetaIsValidResp")
 	if p != nil {
 		l += p.field1Length()
+		l += p.field255Length()
 	}
 	l += bthrift.Binary.FieldStopLength()
 	l += bthrift.Binary.StructEndLength()
@@ -2474,10 +2502,26 @@ func (p *GetCouponMetaIsValidResp) fastWriteField1(buf []byte, binaryWriter bthr
 	return offset
 }
 
+func (p *GetCouponMetaIsValidResp) fastWriteField255(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+	offset := 0
+	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "baseResp", thrift.STRUCT, 255)
+	offset += p.BaseResp.FastWriteNocopy(buf[offset:], binaryWriter)
+	offset += bthrift.Binary.WriteFieldEnd(buf[offset:])
+	return offset
+}
+
 func (p *GetCouponMetaIsValidResp) field1Length() int {
 	l := 0
 	l += bthrift.Binary.FieldBeginLength("is_valid", thrift.BOOL, 1)
 	l += bthrift.Binary.BoolLength(p.IsValid)
+	l += bthrift.Binary.FieldEndLength()
+	return l
+}
+
+func (p *GetCouponMetaIsValidResp) field255Length() int {
+	l := 0
+	l += bthrift.Binary.FieldBeginLength("baseResp", thrift.STRUCT, 255)
+	l += p.BaseResp.BLength()
 	l += bthrift.Binary.FieldEndLength()
 	return l
 }
@@ -2670,6 +2714,20 @@ func (p *GetCouponMetaStockResp) FastRead(buf []byte) (int, error) {
 					goto SkipFieldError
 				}
 			}
+		case 255:
+			if fieldTypeId == thrift.STRUCT {
+				l, err = p.FastReadField255(buf[offset:])
+				offset += l
+				if err != nil {
+					goto ReadFieldError
+				}
+			} else {
+				l, err = bthrift.Binary.Skip(buf[offset:], fieldTypeId)
+				offset += l
+				if err != nil {
+					goto SkipFieldError
+				}
+			}
 		default:
 			l, err = bthrift.Binary.Skip(buf[offset:], fieldTypeId)
 			offset += l
@@ -2737,6 +2795,18 @@ func (p *GetCouponMetaStockResp) FastReadField2(buf []byte) (int, error) {
 	return offset, nil
 }
 
+func (p *GetCouponMetaStockResp) FastReadField255(buf []byte) (int, error) {
+	offset := 0
+	_field := base.NewBaseResp()
+	if l, err := _field.FastRead(buf[offset:]); err != nil {
+		return offset, err
+	} else {
+		offset += l
+	}
+	p.BaseResp = _field
+	return offset, nil
+}
+
 // for compatibility
 func (p *GetCouponMetaStockResp) FastWrite(buf []byte) int {
 	return 0
@@ -2748,6 +2818,7 @@ func (p *GetCouponMetaStockResp) FastWriteNocopy(buf []byte, binaryWriter bthrif
 	if p != nil {
 		offset += p.fastWriteField1(buf[offset:], binaryWriter)
 		offset += p.fastWriteField2(buf[offset:], binaryWriter)
+		offset += p.fastWriteField255(buf[offset:], binaryWriter)
 	}
 	offset += bthrift.Binary.WriteFieldStop(buf[offset:])
 	offset += bthrift.Binary.WriteStructEnd(buf[offset:])
@@ -2760,6 +2831,7 @@ func (p *GetCouponMetaStockResp) BLength() int {
 	if p != nil {
 		l += p.field1Length()
 		l += p.field2Length()
+		l += p.field255Length()
 	}
 	l += bthrift.Binary.FieldStopLength()
 	l += bthrift.Binary.StructEndLength()
@@ -2782,6 +2854,14 @@ func (p *GetCouponMetaStockResp) fastWriteField2(buf []byte, binaryWriter bthrif
 	return offset
 }
 
+func (p *GetCouponMetaStockResp) fastWriteField255(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+	offset := 0
+	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "baseResp", thrift.STRUCT, 255)
+	offset += p.BaseResp.FastWriteNocopy(buf[offset:], binaryWriter)
+	offset += bthrift.Binary.WriteFieldEnd(buf[offset:])
+	return offset
+}
+
 func (p *GetCouponMetaStockResp) field1Length() int {
 	l := 0
 	l += bthrift.Binary.FieldBeginLength("coupon_meta_no", thrift.I64, 1)
@@ -2794,6 +2874,14 @@ func (p *GetCouponMetaStockResp) field2Length() int {
 	l := 0
 	l += bthrift.Binary.FieldBeginLength("stock", thrift.I32, 2)
 	l += bthrift.Binary.I32Length(p.Stock)
+	l += bthrift.Binary.FieldEndLength()
+	return l
+}
+
+func (p *GetCouponMetaStockResp) field255Length() int {
+	l := 0
+	l += bthrift.Binary.FieldBeginLength("baseResp", thrift.STRUCT, 255)
+	l += p.BaseResp.BLength()
 	l += bthrift.Binary.FieldEndLength()
 	return l
 }
@@ -3895,13 +3983,13 @@ ReadStructEndError:
 
 func (p *CouponMetaServiceGetCouponMetaIsValidArgs) FastReadField1(buf []byte) (int, error) {
 	offset := 0
-	_field := NewGetCouponMetaIsValidResp()
+	_field := NewGetCouponMetaIsValidReq()
 	if l, err := _field.FastRead(buf[offset:]); err != nil {
 		return offset, err
 	} else {
 		offset += l
 	}
-	p.Res = _field
+	p.Req = _field
 	return offset, nil
 }
 
@@ -3934,16 +4022,16 @@ func (p *CouponMetaServiceGetCouponMetaIsValidArgs) BLength() int {
 
 func (p *CouponMetaServiceGetCouponMetaIsValidArgs) fastWriteField1(buf []byte, binaryWriter bthrift.BinaryWriter) int {
 	offset := 0
-	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "res", thrift.STRUCT, 1)
-	offset += p.Res.FastWriteNocopy(buf[offset:], binaryWriter)
+	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "req", thrift.STRUCT, 1)
+	offset += p.Req.FastWriteNocopy(buf[offset:], binaryWriter)
 	offset += bthrift.Binary.WriteFieldEnd(buf[offset:])
 	return offset
 }
 
 func (p *CouponMetaServiceGetCouponMetaIsValidArgs) field1Length() int {
 	l := 0
-	l += bthrift.Binary.FieldBeginLength("res", thrift.STRUCT, 1)
-	l += p.Res.BLength()
+	l += bthrift.Binary.FieldBeginLength("req", thrift.STRUCT, 1)
+	l += p.Req.BLength()
 	l += bthrift.Binary.FieldEndLength()
 	return l
 }
@@ -4021,7 +4109,7 @@ ReadStructEndError:
 
 func (p *CouponMetaServiceGetCouponMetaIsValidResult) FastReadField0(buf []byte) (int, error) {
 	offset := 0
-	_field := NewGetCouponMetaIsValidReq()
+	_field := NewGetCouponMetaIsValidResp()
 	if l, err := _field.FastRead(buf[offset:]); err != nil {
 		return offset, err
 	} else {
@@ -4157,7 +4245,7 @@ func (p *CouponMetaServiceGetCouponMetaStockArgs) FastReadField1(buf []byte) (in
 	} else {
 		offset += l
 	}
-	p.Res = _field
+	p.Req = _field
 	return offset, nil
 }
 
@@ -4190,16 +4278,16 @@ func (p *CouponMetaServiceGetCouponMetaStockArgs) BLength() int {
 
 func (p *CouponMetaServiceGetCouponMetaStockArgs) fastWriteField1(buf []byte, binaryWriter bthrift.BinaryWriter) int {
 	offset := 0
-	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "res", thrift.STRUCT, 1)
-	offset += p.Res.FastWriteNocopy(buf[offset:], binaryWriter)
+	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "req", thrift.STRUCT, 1)
+	offset += p.Req.FastWriteNocopy(buf[offset:], binaryWriter)
 	offset += bthrift.Binary.WriteFieldEnd(buf[offset:])
 	return offset
 }
 
 func (p *CouponMetaServiceGetCouponMetaStockArgs) field1Length() int {
 	l := 0
-	l += bthrift.Binary.FieldBeginLength("res", thrift.STRUCT, 1)
-	l += p.Res.BLength()
+	l += bthrift.Binary.FieldBeginLength("req", thrift.STRUCT, 1)
+	l += p.Req.BLength()
 	l += bthrift.Binary.FieldEndLength()
 	return l
 }
@@ -4367,7 +4455,7 @@ func (p *CouponMetaServiceUpdateCouponMetaResult) GetResult() interface{} {
 }
 
 func (p *CouponMetaServiceGetCouponMetaIsValidArgs) GetFirstArgument() interface{} {
-	return p.Res
+	return p.Req
 }
 
 func (p *CouponMetaServiceGetCouponMetaIsValidResult) GetResult() interface{} {
@@ -4375,7 +4463,7 @@ func (p *CouponMetaServiceGetCouponMetaIsValidResult) GetResult() interface{} {
 }
 
 func (p *CouponMetaServiceGetCouponMetaStockArgs) GetFirstArgument() interface{} {
-	return p.Res
+	return p.Req
 }
 
 func (p *CouponMetaServiceGetCouponMetaStockResult) GetResult() interface{} {

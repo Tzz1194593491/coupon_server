@@ -15,8 +15,8 @@ type Client interface {
 	AddCouponMeta(ctx context.Context, req *coupon_meta.AddCouponMetaReq, callOptions ...callopt.Option) (r *coupon_meta.AddCouponMetaResp, err error)
 	DeleteCouponMeta(ctx context.Context, req *coupon_meta.DeleteCouponMetaReq, callOptions ...callopt.Option) (r *coupon_meta.DeleteCouponMetaResp, err error)
 	UpdateCouponMeta(ctx context.Context, req *coupon_meta.UpdateCouponMetaReq, callOptions ...callopt.Option) (r *coupon_meta.UpdateCouponMetaResp, err error)
-	GetCouponMetaIsValid(ctx context.Context, res *coupon_meta.GetCouponMetaIsValidResp, callOptions ...callopt.Option) (r *coupon_meta.GetCouponMetaIsValidReq, err error)
-	GetCouponMetaStock(ctx context.Context, res *coupon_meta.GetCouponMetaStockReq, callOptions ...callopt.Option) (r *coupon_meta.GetCouponMetaStockResp, err error)
+	GetCouponMetaIsValid(ctx context.Context, req *coupon_meta.GetCouponMetaIsValidReq, callOptions ...callopt.Option) (r *coupon_meta.GetCouponMetaIsValidResp, err error)
+	GetCouponMetaStock(ctx context.Context, req *coupon_meta.GetCouponMetaStockReq, callOptions ...callopt.Option) (r *coupon_meta.GetCouponMetaStockResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -68,12 +68,12 @@ func (p *kCouponMetaServiceClient) UpdateCouponMeta(ctx context.Context, req *co
 	return p.kClient.UpdateCouponMeta(ctx, req)
 }
 
-func (p *kCouponMetaServiceClient) GetCouponMetaIsValid(ctx context.Context, res *coupon_meta.GetCouponMetaIsValidResp, callOptions ...callopt.Option) (r *coupon_meta.GetCouponMetaIsValidReq, err error) {
+func (p *kCouponMetaServiceClient) GetCouponMetaIsValid(ctx context.Context, req *coupon_meta.GetCouponMetaIsValidReq, callOptions ...callopt.Option) (r *coupon_meta.GetCouponMetaIsValidResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.GetCouponMetaIsValid(ctx, res)
+	return p.kClient.GetCouponMetaIsValid(ctx, req)
 }
 
-func (p *kCouponMetaServiceClient) GetCouponMetaStock(ctx context.Context, res *coupon_meta.GetCouponMetaStockReq, callOptions ...callopt.Option) (r *coupon_meta.GetCouponMetaStockResp, err error) {
+func (p *kCouponMetaServiceClient) GetCouponMetaStock(ctx context.Context, req *coupon_meta.GetCouponMetaStockReq, callOptions ...callopt.Option) (r *coupon_meta.GetCouponMetaStockResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.GetCouponMetaStock(ctx, res)
+	return p.kClient.GetCouponMetaStock(ctx, req)
 }

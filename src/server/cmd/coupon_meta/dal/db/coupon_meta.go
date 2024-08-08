@@ -37,9 +37,8 @@ func GetCouponMetaByPage(ctx context.Context, pageInfo *constants.PageInfo, coup
 	return res, nil
 }
 
-func GetCouponMetaIsValid(ctx context.Context, couponMeta *CouponMeta) (res *CouponMeta, err error) {
-	tx := DB.WithContext(ctx).Where("validStartTime < ? AND validEndTime > ?", time.Now(), time.Now()).
-		First(&res, couponMeta.CouponMetaNo)
+func GetCouponMetaById(ctx context.Context, couponMeta *CouponMeta) (res *CouponMeta, err error) {
+	tx := DB.WithContext(ctx).Where(couponMeta).First(&res)
 	if tx.Error != nil {
 		if errors.Is(tx.Error, gorm.ErrRecordNotFound) {
 			return res, nil
