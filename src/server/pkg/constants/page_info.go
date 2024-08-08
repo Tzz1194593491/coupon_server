@@ -1,4 +1,4 @@
-package common
+package constants
 
 type PageInfo struct {
 	PageNum  int

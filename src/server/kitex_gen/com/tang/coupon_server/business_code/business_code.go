@@ -16,6 +16,10 @@ const (
 	BusinessCode_PARAM_MISSING BusinessCode = 501
 	BusinessCode_REPEAT_ERROR  BusinessCode = 502
 	BusinessCode_SYSTEM_BUSY   BusinessCode = 503
+	BusinessCode_ADD_FAIL      BusinessCode = 504
+	BusinessCode_DELETE_FAIL   BusinessCode = 505
+	BusinessCode_GET_FAIL      BusinessCode = 506
+	BusinessCode_UPDATE_FAIL   BusinessCode = 507
 )
 
 func (p BusinessCode) String() string {
@@ -30,6 +34,14 @@ func (p BusinessCode) String() string {
 		return "REPEAT_ERROR"
 	case BusinessCode_SYSTEM_BUSY:
 		return "SYSTEM_BUSY"
+	case BusinessCode_ADD_FAIL:
+		return "ADD_FAIL"
+	case BusinessCode_DELETE_FAIL:
+		return "DELETE_FAIL"
+	case BusinessCode_GET_FAIL:
+		return "GET_FAIL"
+	case BusinessCode_UPDATE_FAIL:
+		return "UPDATE_FAIL"
 	}
 	return "<UNSET>"
 }
@@ -46,6 +58,14 @@ func BusinessCodeFromString(s string) (BusinessCode, error) {
 		return BusinessCode_REPEAT_ERROR, nil
 	case "SYSTEM_BUSY":
 		return BusinessCode_SYSTEM_BUSY, nil
+	case "ADD_FAIL":
+		return BusinessCode_ADD_FAIL, nil
+	case "DELETE_FAIL":
+		return BusinessCode_DELETE_FAIL, nil
+	case "GET_FAIL":
+		return BusinessCode_GET_FAIL, nil
+	case "UPDATE_FAIL":
+		return BusinessCode_UPDATE_FAIL, nil
 	}
 	return BusinessCode(0), fmt.Errorf("not a valid BusinessCode string")
 }
