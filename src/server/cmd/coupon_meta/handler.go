@@ -22,6 +22,7 @@ func (s *CouponMetaServiceImpl) GetCouponMeta(ctx context.Context, req *coupon_m
 	}
 	resp.BaseResp = pack.Success(business_code.BusinessCode_SUCCESS)
 	resp.CouponMeta = res
+	resp.BaseInfo = req.BaseInfo
 	return
 }
 

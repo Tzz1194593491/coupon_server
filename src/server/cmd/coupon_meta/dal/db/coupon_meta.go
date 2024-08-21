@@ -10,15 +10,15 @@ import (
 )
 
 type CouponMeta struct {
-	CouponMetaNo     int64
-	CouponMetaType   coupon_meta.CouponMetaType
+	CouponMetaNo     *int64 `gorm:"primaryKey"`
+	CouponMetaType   *coupon_meta.CouponMetaType
 	ValidStartTime   time.Time
 	ValidEndTime     time.Time
-	CouponMetaStatus coupon_meta.CouponStatus
+	CouponMetaStatus *coupon_meta.CouponStatus
 	CouponMetaStock  int32
-	CreateTime       time.Time
-	UpdateTime       time.Time
-	Deleted          gorm.DeletedAt
+	CreatedAt        time.Time
+	UpdatedAt        time.Time
+	DeletedAt        gorm.DeletedAt `gorm:"index"`
 }
 
 func (c *CouponMeta) TableName() string {
@@ -27,7 +27,7 @@ func (c *CouponMeta) TableName() string {
 
 func GetCouponMetaByPage(ctx context.Context, pageInfo *constants.PageInfo, couponMeta *CouponMeta) (res []*CouponMeta, err error) {
 	offset := (pageInfo.PageNum - 1) * pageInfo.PageSize
-	tx := DB.WithContext(ctx).Where(couponMeta).Limit(pageInfo.PageNum).Offset(offset).Find(&res)
+	tx := DB.WithContext(ctx).Where(couponMeta).Limit(pageInfo.PageSize).Offset(offset).Find(&res)
 	if tx.Error != nil {
 		if errors.Is(tx.Error, gorm.ErrRecordNotFound) {
 			return res, nil
@@ -57,7 +57,10 @@ func AddCouponMeta(ctx context.Context, couponMeta *CouponMeta) (err error) {
 }
 
 func UpdateCouponMeta(ctx context.Context, couponMeta *CouponMeta) (err error) {
-	tx := DB.WithContext(ctx).Model(&CouponMeta{}).Updates(&couponMeta)
+	tx := DB.WithContext(ctx).Model(&CouponMeta{}).
+		Where("coupon_meta_no = ?", couponMeta.CouponMetaNo).
+		Omit("coupon_meta_no").
+		Updates(&couponMeta)
 	if tx.Error != nil {
 		return tx.Error
 	}

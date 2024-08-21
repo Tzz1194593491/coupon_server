@@ -21,11 +21,13 @@ func NewManageCouponMeta(ctx context.Context) *ManageCouponMeta {
 }
 
 func (m *ManageCouponMeta) AddManageCouponMeta(req *coupon_meta.AddCouponMetaReq) (err error) {
+	validStartTime, err := utils.StringToTime(req.ValidStartTime)
+	validEndTime, err := utils.StringToTime(req.ValidEndTime)
 	err = db.DB.Transaction(func(tx *gorm.DB) error {
 		return db.AddCouponMeta(m.ctx, &db.CouponMeta{
-			CouponMetaType:  req.Type,
-			ValidStartTime:  utils.UnixSecondToTime(req.ValidStartTime),
-			ValidEndTime:    utils.UnixSecondToTime(req.ValidEndTime),
+			CouponMetaType:  &req.Type,
+			ValidStartTime:  validStartTime,
+			ValidEndTime:    validEndTime,
 			CouponMetaStock: req.Stock,
 		})
 	})
@@ -35,19 +37,21 @@ func (m *ManageCouponMeta) AddManageCouponMeta(req *coupon_meta.AddCouponMetaReq
 func (m *ManageCouponMeta) DeleteManageCouponMeta(req *coupon_meta.DeleteCouponMetaReq) (err error) {
 	err = db.DB.Transaction(func(tx *gorm.DB) error {
 		return db.DeleteCouponMeta(m.ctx, &db.CouponMeta{
-			CouponMetaNo: req.CouponMetaNo,
+			CouponMetaNo: &req.CouponMetaNo,
 		})
 	})
 	return err
 }
 
 func (m *ManageCouponMeta) UpdateManageCouponMeta(req *coupon_meta.UpdateCouponMetaReq) (err error) {
+	validStartTime, err := utils.StringToTime(req.ValidStartTime)
+	validEndTime, err := utils.StringToTime(req.ValidEndTime)
 	err = db.DB.Transaction(func(tx *gorm.DB) error {
-		return db.DeleteCouponMeta(m.ctx, &db.CouponMeta{
-			CouponMetaNo:    req.CouponMetaNo,
-			CouponMetaType:  req.Type,
-			ValidStartTime:  utils.UnixSecondToTime(req.ValidStartTime),
-			ValidEndTime:    utils.UnixSecondToTime(req.ValidEndTime),
+		return db.UpdateCouponMeta(m.ctx, &db.CouponMeta{
+			CouponMetaNo:    &req.CouponMetaNo,
+			CouponMetaType:  &req.Type,
+			ValidStartTime:  validStartTime,
+			ValidEndTime:    validEndTime,
 			CouponMetaStock: req.Stock,
 		})
 	})
@@ -61,8 +65,8 @@ func (m *ManageCouponMeta) GetManageCouponMetaByPage(req *coupon_meta.GetCouponM
 	}
 	byPage, err := db.GetCouponMetaByPage(m.ctx, pageInfo, &db.CouponMeta{
 		CouponMetaNo:     req.CouponMetaNo,
-		CouponMetaType:   *req.Type,
-		CouponMetaStatus: *req.Status,
+		CouponMetaType:   req.Type,
+		CouponMetaStatus: req.Status,
 	})
 	if err != nil {
 		return nil, err

@@ -19,7 +19,7 @@ func NewStatusCouponMeta(ctx context.Context) *StatusCouponMeta {
 
 func (s *StatusCouponMeta) GetStatusCouponMetaIsValid(req *coupon_meta.GetCouponMetaIsValidReq) (isValid bool) {
 	one, err := db.GetCouponMetaById(s.ctx, &db.CouponMeta{
-		CouponMetaNo: req.CouponMetaNo,
+		CouponMetaNo: &req.CouponMetaNo,
 	})
 	if err != nil {
 		return false
@@ -30,7 +30,7 @@ func (s *StatusCouponMeta) GetStatusCouponMetaIsValid(req *coupon_meta.GetCoupon
 
 func (s *StatusCouponMeta) GetStatusCouponMetaStock(req *coupon_meta.GetCouponMetaStockReq) (stock int32) {
 	one, err := db.GetCouponMetaById(s.ctx, &db.CouponMeta{
-		CouponMetaNo: req.CouponMetaNo,
+		CouponMetaNo: &req.CouponMetaNo,
 	})
 	if err != nil {
 		return 0

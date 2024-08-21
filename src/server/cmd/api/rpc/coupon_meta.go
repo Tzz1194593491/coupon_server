@@ -21,7 +21,7 @@ func initCouponMetaRpc() {
 		panic(err)
 	}
 	c, err := couponmetaservice.NewClient(
-		constants.ApiServiceName,
+		constants.CouponMetaServiceName,
 		client.WithMiddleware(middleware.CommonMiddleware),
 		client.WithInstanceMW(middleware.ClientMiddleware),
 		client.WithMuxConnection(1),                       // mux
@@ -45,4 +45,37 @@ func AddCouponMeta(ctx context.Context, req *coupon_meta.AddCouponMetaReq) busin
 		return resp.BaseResp.Code
 	}
 	return business_code.BusinessCode_SUCCESS
+}
+
+func DeleteCouponMeta(ctx context.Context, req *coupon_meta.DeleteCouponMetaReq) business_code.BusinessCode {
+	resp, err := couponMetaClient.DeleteCouponMeta(ctx, req)
+	if err != nil {
+		return business_code.BusinessCode_DELETE_FAIL
+	}
+	if resp.BaseResp.IsError {
+		return resp.BaseResp.Code
+	}
+	return business_code.BusinessCode_SUCCESS
+}
+
+func UpdateCouponMeta(ctx context.Context, req *coupon_meta.UpdateCouponMetaReq) business_code.BusinessCode {
+	resp, err := couponMetaClient.UpdateCouponMeta(ctx, req)
+	if err != nil {
+		return business_code.BusinessCode_UPDATE_FAIL
+	}
+	if resp.BaseResp.IsError {
+		return resp.BaseResp.Code
+	}
+	return business_code.BusinessCode_SUCCESS
+}
+
+func GetCouponMeta(ctx context.Context, req *coupon_meta.GetCouponMetaReq) (business_code.BusinessCode, interface{}) {
+	resp, err := couponMetaClient.GetCouponMeta(ctx, req)
+	if err != nil {
+		return business_code.BusinessCode_GET_FAIL, nil
+	}
+	if resp.BaseResp.IsError {
+		return resp.BaseResp.Code, nil
+	}
+	return business_code.BusinessCode_SUCCESS, resp
 }

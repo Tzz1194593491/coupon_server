@@ -21,5 +21,5 @@ func GetOutBoundIP() (ip string, err error) {
 	}
 	localAddr := conn.LocalAddr().(*net.UDPAddr)
 	ip = strings.Split(localAddr.String(), ":")[0]
-	return
+	return "localhost", nil
 }

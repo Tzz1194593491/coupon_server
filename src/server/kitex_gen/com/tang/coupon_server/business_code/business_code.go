@@ -11,15 +11,16 @@ import (
 type BusinessCode int64
 
 const (
-	BusinessCode_SUCCESS       BusinessCode = 200
-	BusinessCode_SYSTEM_ERROR  BusinessCode = 500
-	BusinessCode_PARAM_MISSING BusinessCode = 501
-	BusinessCode_REPEAT_ERROR  BusinessCode = 502
-	BusinessCode_SYSTEM_BUSY   BusinessCode = 503
-	BusinessCode_ADD_FAIL      BusinessCode = 504
-	BusinessCode_DELETE_FAIL   BusinessCode = 505
-	BusinessCode_GET_FAIL      BusinessCode = 506
-	BusinessCode_UPDATE_FAIL   BusinessCode = 507
+	BusinessCode_SUCCESS          BusinessCode = 200
+	BusinessCode_SYSTEM_ERROR     BusinessCode = 500
+	BusinessCode_PARAM_MISSING    BusinessCode = 501
+	BusinessCode_REPEAT_ERROR     BusinessCode = 502
+	BusinessCode_SYSTEM_BUSY      BusinessCode = 503
+	BusinessCode_ADD_FAIL         BusinessCode = 504
+	BusinessCode_DELETE_FAIL      BusinessCode = 505
+	BusinessCode_GET_FAIL         BusinessCode = 506
+	BusinessCode_UPDATE_FAIL      BusinessCode = 507
+	BusinessCode_PARAM_PARSE_FAIL BusinessCode = 508
 )
 
 func (p BusinessCode) String() string {
@@ -42,6 +43,8 @@ func (p BusinessCode) String() string {
 		return "GET_FAIL"
 	case BusinessCode_UPDATE_FAIL:
 		return "UPDATE_FAIL"
+	case BusinessCode_PARAM_PARSE_FAIL:
+		return "PARAM_PARSE_FAIL"
 	}
 	return "<UNSET>"
 }
@@ -66,6 +69,8 @@ func BusinessCodeFromString(s string) (BusinessCode, error) {
 		return BusinessCode_GET_FAIL, nil
 	case "UPDATE_FAIL":
 		return BusinessCode_UPDATE_FAIL, nil
+	case "PARAM_PARSE_FAIL":
+		return BusinessCode_PARAM_PARSE_FAIL, nil
 	}
 	return BusinessCode(0), fmt.Errorf("not a valid BusinessCode string")
 }

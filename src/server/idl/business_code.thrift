@@ -10,4 +10,5 @@ enum BusinessCode {
     DELETE_FAIL = 505 // 删除失败
     GET_FAIL = 506 // 获取失败
     UPDATE_FAIL = 507 // 更新失败
+    PARAM_PARSE_FAIL = 508 // 参数解析失败
 }

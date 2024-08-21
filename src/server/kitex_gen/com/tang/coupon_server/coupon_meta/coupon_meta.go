@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"github.com/Tzz1194593491/coupon_server/kitex_gen/com/tang/coupon_server/base"
 	"github.com/apache/thrift/lib/go/thrift"
+	"strings"
 )
 
 type CouponMetaType int64
@@ -98,13 +99,13 @@ func (p *CouponStatus) Value() (driver.Value, error) {
 type CouponMeta struct {
 	CouponMetaNo   int64          `thrift:"coupon_meta_no,1" frugal:"1,default,i64" json:"coupon_meta_no"`
 	Type           CouponMetaType `thrift:"type,2" frugal:"2,default,CouponMetaType" json:"type"`
-	ValidStartTime int64          `thrift:"valid_start_time,3" frugal:"3,default,i64" json:"valid_start_time"`
-	ValidEndTime   int64          `thrift:"valid_end_time,4" frugal:"4,default,i64" json:"valid_end_time"`
+	ValidStartTime string         `thrift:"valid_start_time,3" frugal:"3,default,string" json:"valid_start_time"`
+	ValidEndTime   string         `thrift:"valid_end_time,4" frugal:"4,default,string" json:"valid_end_time"`
 	Status         CouponStatus   `thrift:"status,5" frugal:"5,default,CouponStatus" json:"status"`
 	Stock          int32          `thrift:"stock,6" frugal:"6,default,i32" json:"stock"`
-	CreateTime     int64          `thrift:"create_time,7" frugal:"7,default,i64" json:"create_time"`
-	UpdateTime     int64          `thrift:"update_time,8" frugal:"8,default,i64" json:"update_time"`
-	DeleteTime     int64          `thrift:"delete_time,9" frugal:"9,default,i64" json:"delete_time"`
+	CreateTime     string         `thrift:"create_time,7" frugal:"7,default,string" json:"create_time"`
+	UpdateTime     string         `thrift:"update_time,8" frugal:"8,default,string" json:"update_time"`
+	DeleteTime     string         `thrift:"delete_time,9" frugal:"9,default,string" json:"delete_time"`
 }
 
 func NewCouponMeta() *CouponMeta {
@@ -122,11 +123,11 @@ func (p *CouponMeta) GetType() (v CouponMetaType) {
 	return p.Type
 }
 
-func (p *CouponMeta) GetValidStartTime() (v int64) {
+func (p *CouponMeta) GetValidStartTime() (v string) {
 	return p.ValidStartTime
 }
 
-func (p *CouponMeta) GetValidEndTime() (v int64) {
+func (p *CouponMeta) GetValidEndTime() (v string) {
 	return p.ValidEndTime
 }
 
@@ -138,15 +139,15 @@ func (p *CouponMeta) GetStock() (v int32) {
 	return p.Stock
 }
 
-func (p *CouponMeta) GetCreateTime() (v int64) {
+func (p *CouponMeta) GetCreateTime() (v string) {
 	return p.CreateTime
 }
 
-func (p *CouponMeta) GetUpdateTime() (v int64) {
+func (p *CouponMeta) GetUpdateTime() (v string) {
 	return p.UpdateTime
 }
 
-func (p *CouponMeta) GetDeleteTime() (v int64) {
+func (p *CouponMeta) GetDeleteTime() (v string) {
 	return p.DeleteTime
 }
 func (p *CouponMeta) SetCouponMetaNo(val int64) {
@@ -155,10 +156,10 @@ func (p *CouponMeta) SetCouponMetaNo(val int64) {
 func (p *CouponMeta) SetType(val CouponMetaType) {
 	p.Type = val
 }
-func (p *CouponMeta) SetValidStartTime(val int64) {
+func (p *CouponMeta) SetValidStartTime(val string) {
 	p.ValidStartTime = val
 }
-func (p *CouponMeta) SetValidEndTime(val int64) {
+func (p *CouponMeta) SetValidEndTime(val string) {
 	p.ValidEndTime = val
 }
 func (p *CouponMeta) SetStatus(val CouponStatus) {
@@ -167,13 +168,13 @@ func (p *CouponMeta) SetStatus(val CouponStatus) {
 func (p *CouponMeta) SetStock(val int32) {
 	p.Stock = val
 }
-func (p *CouponMeta) SetCreateTime(val int64) {
+func (p *CouponMeta) SetCreateTime(val string) {
 	p.CreateTime = val
 }
-func (p *CouponMeta) SetUpdateTime(val int64) {
+func (p *CouponMeta) SetUpdateTime(val string) {
 	p.UpdateTime = val
 }
-func (p *CouponMeta) SetDeleteTime(val int64) {
+func (p *CouponMeta) SetDeleteTime(val string) {
 	p.DeleteTime = val
 }
 
@@ -225,7 +226,7 @@ func (p *CouponMeta) Read(iprot thrift.TProtocol) (err error) {
 				goto SkipFieldError
 			}
 		case 3:
-			if fieldTypeId == thrift.I64 {
+			if fieldTypeId == thrift.STRING {
 				if err = p.ReadField3(iprot); err != nil {
 					goto ReadFieldError
 				}
@@ -233,7 +234,7 @@ func (p *CouponMeta) Read(iprot thrift.TProtocol) (err error) {
 				goto SkipFieldError
 			}
 		case 4:
-			if fieldTypeId == thrift.I64 {
+			if fieldTypeId == thrift.STRING {
 				if err = p.ReadField4(iprot); err != nil {
 					goto ReadFieldError
 				}
@@ -257,7 +258,7 @@ func (p *CouponMeta) Read(iprot thrift.TProtocol) (err error) {
 				goto SkipFieldError
 			}
 		case 7:
-			if fieldTypeId == thrift.I64 {
+			if fieldTypeId == thrift.STRING {
 				if err = p.ReadField7(iprot); err != nil {
 					goto ReadFieldError
 				}
@@ -265,7 +266,7 @@ func (p *CouponMeta) Read(iprot thrift.TProtocol) (err error) {
 				goto SkipFieldError
 			}
 		case 8:
-			if fieldTypeId == thrift.I64 {
+			if fieldTypeId == thrift.STRING {
 				if err = p.ReadField8(iprot); err != nil {
 					goto ReadFieldError
 				}
@@ -273,7 +274,7 @@ func (p *CouponMeta) Read(iprot thrift.TProtocol) (err error) {
 				goto SkipFieldError
 			}
 		case 9:
-			if fieldTypeId == thrift.I64 {
+			if fieldTypeId == thrift.STRING {
 				if err = p.ReadField9(iprot); err != nil {
 					goto ReadFieldError
 				}
@@ -333,8 +334,8 @@ func (p *CouponMeta) ReadField2(iprot thrift.TProtocol) error {
 }
 func (p *CouponMeta) ReadField3(iprot thrift.TProtocol) error {
 
-	var _field int64
-	if v, err := iprot.ReadI64(); err != nil {
+	var _field string
+	if v, err := iprot.ReadString(); err != nil {
 		return err
 	} else {
 		_field = v
@@ -344,8 +345,8 @@ func (p *CouponMeta) ReadField3(iprot thrift.TProtocol) error {
 }
 func (p *CouponMeta) ReadField4(iprot thrift.TProtocol) error {
 
-	var _field int64
-	if v, err := iprot.ReadI64(); err != nil {
+	var _field string
+	if v, err := iprot.ReadString(); err != nil {
 		return err
 	} else {
 		_field = v
@@ -377,8 +378,8 @@ func (p *CouponMeta) ReadField6(iprot thrift.TProtocol) error {
 }
 func (p *CouponMeta) ReadField7(iprot thrift.TProtocol) error {
 
-	var _field int64
-	if v, err := iprot.ReadI64(); err != nil {
+	var _field string
+	if v, err := iprot.ReadString(); err != nil {
 		return err
 	} else {
 		_field = v
@@ -388,8 +389,8 @@ func (p *CouponMeta) ReadField7(iprot thrift.TProtocol) error {
 }
 func (p *CouponMeta) ReadField8(iprot thrift.TProtocol) error {
 
-	var _field int64
-	if v, err := iprot.ReadI64(); err != nil {
+	var _field string
+	if v, err := iprot.ReadString(); err != nil {
 		return err
 	} else {
 		_field = v
@@ -399,8 +400,8 @@ func (p *CouponMeta) ReadField8(iprot thrift.TProtocol) error {
 }
 func (p *CouponMeta) ReadField9(iprot thrift.TProtocol) error {
 
-	var _field int64
-	if v, err := iprot.ReadI64(); err != nil {
+	var _field string
+	if v, err := iprot.ReadString(); err != nil {
 		return err
 	} else {
 		_field = v
@@ -504,10 +505,10 @@ WriteFieldEndError:
 }
 
 func (p *CouponMeta) writeField3(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("valid_start_time", thrift.I64, 3); err != nil {
+	if err = oprot.WriteFieldBegin("valid_start_time", thrift.STRING, 3); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteI64(p.ValidStartTime); err != nil {
+	if err := oprot.WriteString(p.ValidStartTime); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -521,10 +522,10 @@ WriteFieldEndError:
 }
 
 func (p *CouponMeta) writeField4(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("valid_end_time", thrift.I64, 4); err != nil {
+	if err = oprot.WriteFieldBegin("valid_end_time", thrift.STRING, 4); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteI64(p.ValidEndTime); err != nil {
+	if err := oprot.WriteString(p.ValidEndTime); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -572,10 +573,10 @@ WriteFieldEndError:
 }
 
 func (p *CouponMeta) writeField7(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("create_time", thrift.I64, 7); err != nil {
+	if err = oprot.WriteFieldBegin("create_time", thrift.STRING, 7); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteI64(p.CreateTime); err != nil {
+	if err := oprot.WriteString(p.CreateTime); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -589,10 +590,10 @@ WriteFieldEndError:
 }
 
 func (p *CouponMeta) writeField8(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("update_time", thrift.I64, 8); err != nil {
+	if err = oprot.WriteFieldBegin("update_time", thrift.STRING, 8); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteI64(p.UpdateTime); err != nil {
+	if err := oprot.WriteString(p.UpdateTime); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -606,10 +607,10 @@ WriteFieldEndError:
 }
 
 func (p *CouponMeta) writeField9(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("delete_time", thrift.I64, 9); err != nil {
+	if err = oprot.WriteFieldBegin("delete_time", thrift.STRING, 9); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteI64(p.DeleteTime); err != nil {
+	if err := oprot.WriteString(p.DeleteTime); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -680,16 +681,16 @@ func (p *CouponMeta) Field2DeepEqual(src CouponMetaType) bool {
 	}
 	return true
 }
-func (p *CouponMeta) Field3DeepEqual(src int64) bool {
+func (p *CouponMeta) Field3DeepEqual(src string) bool {
 
-	if p.ValidStartTime != src {
+	if strings.Compare(p.ValidStartTime, src) != 0 {
 		return false
 	}
 	return true
 }
-func (p *CouponMeta) Field4DeepEqual(src int64) bool {
+func (p *CouponMeta) Field4DeepEqual(src string) bool {
 
-	if p.ValidEndTime != src {
+	if strings.Compare(p.ValidEndTime, src) != 0 {
 		return false
 	}
 	return true
@@ -708,30 +709,30 @@ func (p *CouponMeta) Field6DeepEqual(src int32) bool {
 	}
 	return true
 }
-func (p *CouponMeta) Field7DeepEqual(src int64) bool {
+func (p *CouponMeta) Field7DeepEqual(src string) bool {
 
-	if p.CreateTime != src {
+	if strings.Compare(p.CreateTime, src) != 0 {
 		return false
 	}
 	return true
 }
-func (p *CouponMeta) Field8DeepEqual(src int64) bool {
+func (p *CouponMeta) Field8DeepEqual(src string) bool {
 
-	if p.UpdateTime != src {
+	if strings.Compare(p.UpdateTime, src) != 0 {
 		return false
 	}
 	return true
 }
-func (p *CouponMeta) Field9DeepEqual(src int64) bool {
+func (p *CouponMeta) Field9DeepEqual(src string) bool {
 
-	if p.DeleteTime != src {
+	if strings.Compare(p.DeleteTime, src) != 0 {
 		return false
 	}
 	return true
 }
 
 type GetCouponMetaReq struct {
-	CouponMetaNo int64              `thrift:"coupon_meta_no,1,required" frugal:"1,required,i64" json:"coupon_meta_no"`
+	CouponMetaNo *int64             `thrift:"coupon_meta_no,1,optional" frugal:"1,optional,i64" json:"coupon_meta_no,omitempty"`
 	Type         *CouponMetaType    `thrift:"type,2,optional" frugal:"2,optional,CouponMetaType" json:"type,omitempty"`
 	Status       *CouponStatus      `thrift:"status,3,optional" frugal:"3,optional,CouponStatus" json:"status,omitempty"`
 	BaseInfo     *base.BasePageInfo `thrift:"base_info,255,required" frugal:"255,required,base.BasePageInfo" json:"base_info"`
@@ -744,8 +745,13 @@ func NewGetCouponMetaReq() *GetCouponMetaReq {
 func (p *GetCouponMetaReq) InitDefault() {
 }
 
+var GetCouponMetaReq_CouponMetaNo_DEFAULT int64
+
 func (p *GetCouponMetaReq) GetCouponMetaNo() (v int64) {
-	return p.CouponMetaNo
+	if !p.IsSetCouponMetaNo() {
+		return GetCouponMetaReq_CouponMetaNo_DEFAULT
+	}
+	return *p.CouponMetaNo
 }
 
 var GetCouponMetaReq_Type_DEFAULT CouponMetaType
@@ -774,7 +780,7 @@ func (p *GetCouponMetaReq) GetBaseInfo() (v *base.BasePageInfo) {
 	}
 	return p.BaseInfo
 }
-func (p *GetCouponMetaReq) SetCouponMetaNo(val int64) {
+func (p *GetCouponMetaReq) SetCouponMetaNo(val *int64) {
 	p.CouponMetaNo = val
 }
 func (p *GetCouponMetaReq) SetType(val *CouponMetaType) {
@@ -794,6 +800,10 @@ var fieldIDToName_GetCouponMetaReq = map[int16]string{
 	255: "base_info",
 }
 
+func (p *GetCouponMetaReq) IsSetCouponMetaNo() bool {
+	return p.CouponMetaNo != nil
+}
+
 func (p *GetCouponMetaReq) IsSetType() bool {
 	return p.Type != nil
 }
@@ -810,7 +820,6 @@ func (p *GetCouponMetaReq) Read(iprot thrift.TProtocol) (err error) {
 
 	var fieldTypeId thrift.TType
 	var fieldId int16
-	var issetCouponMetaNo bool = false
 	var issetBaseInfo bool = false
 
 	if _, err = iprot.ReadStructBegin(); err != nil {
@@ -832,7 +841,6 @@ func (p *GetCouponMetaReq) Read(iprot thrift.TProtocol) (err error) {
 				if err = p.ReadField1(iprot); err != nil {
 					goto ReadFieldError
 				}
-				issetCouponMetaNo = true
 			} else if err = iprot.Skip(fieldTypeId); err != nil {
 				goto SkipFieldError
 			}
@@ -874,11 +882,6 @@ func (p *GetCouponMetaReq) Read(iprot thrift.TProtocol) (err error) {
 		goto ReadStructEndError
 	}
 
-	if !issetCouponMetaNo {
-		fieldId = 1
-		goto RequiredFieldNotSetError
-	}
-
 	if !issetBaseInfo {
 		fieldId = 255
 		goto RequiredFieldNotSetError
@@ -903,11 +906,11 @@ RequiredFieldNotSetError:
 
 func (p *GetCouponMetaReq) ReadField1(iprot thrift.TProtocol) error {
 
-	var _field int64
+	var _field *int64
 	if v, err := iprot.ReadI64(); err != nil {
 		return err
 	} else {
-		_field = v
+		_field = &v
 	}
 	p.CouponMetaNo = _field
 	return nil
@@ -986,14 +989,16 @@ WriteStructEndError:
 }
 
 func (p *GetCouponMetaReq) writeField1(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("coupon_meta_no", thrift.I64, 1); err != nil {
-		goto WriteFieldBeginError
-	}
-	if err := oprot.WriteI64(p.CouponMetaNo); err != nil {
-		return err
-	}
-	if err = oprot.WriteFieldEnd(); err != nil {
-		goto WriteFieldEndError
+	if p.IsSetCouponMetaNo() {
+		if err = oprot.WriteFieldBegin("coupon_meta_no", thrift.I64, 1); err != nil {
+			goto WriteFieldBeginError
+		}
+		if err := oprot.WriteI64(*p.CouponMetaNo); err != nil {
+			return err
+		}
+		if err = oprot.WriteFieldEnd(); err != nil {
+			goto WriteFieldEndError
+		}
 	}
 	return nil
 WriteFieldBeginError:
@@ -1086,9 +1091,14 @@ func (p *GetCouponMetaReq) DeepEqual(ano *GetCouponMetaReq) bool {
 	return true
 }
 
-func (p *GetCouponMetaReq) Field1DeepEqual(src int64) bool {
+func (p *GetCouponMetaReq) Field1DeepEqual(src *int64) bool {
 
-	if p.CouponMetaNo != src {
+	if p.CouponMetaNo == src {
+		return true
+	} else if p.CouponMetaNo == nil || src == nil {
+		return false
+	}
+	if *p.CouponMetaNo != *src {
 		return false
 	}
 	return true
@@ -1126,8 +1136,9 @@ func (p *GetCouponMetaReq) Field255DeepEqual(src *base.BasePageInfo) bool {
 }
 
 type GetCouponMetaResp struct {
-	CouponMeta []*CouponMeta  `thrift:"coupon_meta,1" frugal:"1,default,list<CouponMeta>" json:"coupon_meta"`
-	BaseResp   *base.BaseResp `thrift:"baseResp,255" frugal:"255,default,base.BaseResp" json:"baseResp"`
+	CouponMeta []*CouponMeta      `thrift:"coupon_meta,1" frugal:"1,default,list<CouponMeta>" json:"coupon_meta"`
+	BaseInfo   *base.BasePageInfo `thrift:"base_info,2" frugal:"2,default,base.BasePageInfo" json:"base_info"`
+	BaseResp   *base.BaseResp     `thrift:"baseResp,255" frugal:"255,default,base.BaseResp" json:"baseResp"`
 }
 
 func NewGetCouponMetaResp() *GetCouponMetaResp {
@@ -1141,6 +1152,15 @@ func (p *GetCouponMetaResp) GetCouponMeta() (v []*CouponMeta) {
 	return p.CouponMeta
 }
 
+var GetCouponMetaResp_BaseInfo_DEFAULT *base.BasePageInfo
+
+func (p *GetCouponMetaResp) GetBaseInfo() (v *base.BasePageInfo) {
+	if !p.IsSetBaseInfo() {
+		return GetCouponMetaResp_BaseInfo_DEFAULT
+	}
+	return p.BaseInfo
+}
+
 var GetCouponMetaResp_BaseResp_DEFAULT *base.BaseResp
 
 func (p *GetCouponMetaResp) GetBaseResp() (v *base.BaseResp) {
@@ -1152,13 +1172,21 @@ func (p *GetCouponMetaResp) GetBaseResp() (v *base.BaseResp) {
 func (p *GetCouponMetaResp) SetCouponMeta(val []*CouponMeta) {
 	p.CouponMeta = val
 }
+func (p *GetCouponMetaResp) SetBaseInfo(val *base.BasePageInfo) {
+	p.BaseInfo = val
+}
 func (p *GetCouponMetaResp) SetBaseResp(val *base.BaseResp) {
 	p.BaseResp = val
 }
 
 var fieldIDToName_GetCouponMetaResp = map[int16]string{
 	1:   "coupon_meta",
+	2:   "base_info",
 	255: "baseResp",
+}
+
+func (p *GetCouponMetaResp) IsSetBaseInfo() bool {
+	return p.BaseInfo != nil
 }
 
 func (p *GetCouponMetaResp) IsSetBaseResp() bool {
@@ -1187,6 +1215,14 @@ func (p *GetCouponMetaResp) Read(iprot thrift.TProtocol) (err error) {
 		case 1:
 			if fieldTypeId == thrift.LIST {
 				if err = p.ReadField1(iprot); err != nil {
+					goto ReadFieldError
+				}
+			} else if err = iprot.Skip(fieldTypeId); err != nil {
+				goto SkipFieldError
+			}
+		case 2:
+			if fieldTypeId == thrift.STRUCT {
+				if err = p.ReadField2(iprot); err != nil {
 					goto ReadFieldError
 				}
 			} else if err = iprot.Skip(fieldTypeId); err != nil {
@@ -1252,6 +1288,14 @@ func (p *GetCouponMetaResp) ReadField1(iprot thrift.TProtocol) error {
 	p.CouponMeta = _field
 	return nil
 }
+func (p *GetCouponMetaResp) ReadField2(iprot thrift.TProtocol) error {
+	_field := base.NewBasePageInfo()
+	if err := _field.Read(iprot); err != nil {
+		return err
+	}
+	p.BaseInfo = _field
+	return nil
+}
 func (p *GetCouponMetaResp) ReadField255(iprot thrift.TProtocol) error {
 	_field := base.NewBaseResp()
 	if err := _field.Read(iprot); err != nil {
@@ -1269,6 +1313,10 @@ func (p *GetCouponMetaResp) Write(oprot thrift.TProtocol) (err error) {
 	if p != nil {
 		if err = p.writeField1(oprot); err != nil {
 			fieldId = 1
+			goto WriteFieldError
+		}
+		if err = p.writeField2(oprot); err != nil {
+			fieldId = 2
 			goto WriteFieldError
 		}
 		if err = p.writeField255(oprot); err != nil {
@@ -1318,6 +1366,23 @@ WriteFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 1 end error: ", p), err)
 }
 
+func (p *GetCouponMetaResp) writeField2(oprot thrift.TProtocol) (err error) {
+	if err = oprot.WriteFieldBegin("base_info", thrift.STRUCT, 2); err != nil {
+		goto WriteFieldBeginError
+	}
+	if err := p.BaseInfo.Write(oprot); err != nil {
+		return err
+	}
+	if err = oprot.WriteFieldEnd(); err != nil {
+		goto WriteFieldEndError
+	}
+	return nil
+WriteFieldBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 2 begin error: ", p), err)
+WriteFieldEndError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 2 end error: ", p), err)
+}
+
 func (p *GetCouponMetaResp) writeField255(oprot thrift.TProtocol) (err error) {
 	if err = oprot.WriteFieldBegin("baseResp", thrift.STRUCT, 255); err != nil {
 		goto WriteFieldBeginError
@@ -1352,6 +1417,9 @@ func (p *GetCouponMetaResp) DeepEqual(ano *GetCouponMetaResp) bool {
 	if !p.Field1DeepEqual(ano.CouponMeta) {
 		return false
 	}
+	if !p.Field2DeepEqual(ano.BaseInfo) {
+		return false
+	}
 	if !p.Field255DeepEqual(ano.BaseResp) {
 		return false
 	}
@@ -1371,6 +1439,13 @@ func (p *GetCouponMetaResp) Field1DeepEqual(src []*CouponMeta) bool {
 	}
 	return true
 }
+func (p *GetCouponMetaResp) Field2DeepEqual(src *base.BasePageInfo) bool {
+
+	if !p.BaseInfo.DeepEqual(src) {
+		return false
+	}
+	return true
+}
 func (p *GetCouponMetaResp) Field255DeepEqual(src *base.BaseResp) bool {
 
 	if !p.BaseResp.DeepEqual(src) {
@@ -1381,8 +1456,8 @@ func (p *GetCouponMetaResp) Field255DeepEqual(src *base.BaseResp) bool {
 
 type AddCouponMetaReq struct {
 	Type           CouponMetaType `thrift:"type,1,required" frugal:"1,required,CouponMetaType" json:"type"`
-	ValidStartTime int64          `thrift:"valid_start_time,2,required" frugal:"2,required,i64" json:"valid_start_time"`
-	ValidEndTime   int64          `thrift:"valid_end_time,3,required" frugal:"3,required,i64" json:"valid_end_time"`
+	ValidStartTime string         `thrift:"valid_start_time,2,required" frugal:"2,required,string" json:"valid_start_time"`
+	ValidEndTime   string         `thrift:"valid_end_time,3,required" frugal:"3,required,string" json:"valid_end_time"`
 	Stock          int32          `thrift:"stock,4,required" frugal:"4,required,i32" json:"stock"`
 }
 
@@ -1397,11 +1472,11 @@ func (p *AddCouponMetaReq) GetType() (v CouponMetaType) {
 	return p.Type
 }
 
-func (p *AddCouponMetaReq) GetValidStartTime() (v int64) {
+func (p *AddCouponMetaReq) GetValidStartTime() (v string) {
 	return p.ValidStartTime
 }
 
-func (p *AddCouponMetaReq) GetValidEndTime() (v int64) {
+func (p *AddCouponMetaReq) GetValidEndTime() (v string) {
 	return p.ValidEndTime
 }
 
@@ -1411,10 +1486,10 @@ func (p *AddCouponMetaReq) GetStock() (v int32) {
 func (p *AddCouponMetaReq) SetType(val CouponMetaType) {
 	p.Type = val
 }
-func (p *AddCouponMetaReq) SetValidStartTime(val int64) {
+func (p *AddCouponMetaReq) SetValidStartTime(val string) {
 	p.ValidStartTime = val
 }
-func (p *AddCouponMetaReq) SetValidEndTime(val int64) {
+func (p *AddCouponMetaReq) SetValidEndTime(val string) {
 	p.ValidEndTime = val
 }
 func (p *AddCouponMetaReq) SetStock(val int32) {
@@ -1461,7 +1536,7 @@ func (p *AddCouponMetaReq) Read(iprot thrift.TProtocol) (err error) {
 				goto SkipFieldError
 			}
 		case 2:
-			if fieldTypeId == thrift.I64 {
+			if fieldTypeId == thrift.STRING {
 				if err = p.ReadField2(iprot); err != nil {
 					goto ReadFieldError
 				}
@@ -1470,7 +1545,7 @@ func (p *AddCouponMetaReq) Read(iprot thrift.TProtocol) (err error) {
 				goto SkipFieldError
 			}
 		case 3:
-			if fieldTypeId == thrift.I64 {
+			if fieldTypeId == thrift.STRING {
 				if err = p.ReadField3(iprot); err != nil {
 					goto ReadFieldError
 				}
@@ -1550,8 +1625,8 @@ func (p *AddCouponMetaReq) ReadField1(iprot thrift.TProtocol) error {
 }
 func (p *AddCouponMetaReq) ReadField2(iprot thrift.TProtocol) error {
 
-	var _field int64
-	if v, err := iprot.ReadI64(); err != nil {
+	var _field string
+	if v, err := iprot.ReadString(); err != nil {
 		return err
 	} else {
 		_field = v
@@ -1561,8 +1636,8 @@ func (p *AddCouponMetaReq) ReadField2(iprot thrift.TProtocol) error {
 }
 func (p *AddCouponMetaReq) ReadField3(iprot thrift.TProtocol) error {
 
-	var _field int64
-	if v, err := iprot.ReadI64(); err != nil {
+	var _field string
+	if v, err := iprot.ReadString(); err != nil {
 		return err
 	} else {
 		_field = v
@@ -1640,10 +1715,10 @@ WriteFieldEndError:
 }
 
 func (p *AddCouponMetaReq) writeField2(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("valid_start_time", thrift.I64, 2); err != nil {
+	if err = oprot.WriteFieldBegin("valid_start_time", thrift.STRING, 2); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteI64(p.ValidStartTime); err != nil {
+	if err := oprot.WriteString(p.ValidStartTime); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -1657,10 +1732,10 @@ WriteFieldEndError:
 }
 
 func (p *AddCouponMetaReq) writeField3(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("valid_end_time", thrift.I64, 3); err != nil {
+	if err = oprot.WriteFieldBegin("valid_end_time", thrift.STRING, 3); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteI64(p.ValidEndTime); err != nil {
+	if err := oprot.WriteString(p.ValidEndTime); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -1726,16 +1801,16 @@ func (p *AddCouponMetaReq) Field1DeepEqual(src CouponMetaType) bool {
 	}
 	return true
 }
-func (p *AddCouponMetaReq) Field2DeepEqual(src int64) bool {
+func (p *AddCouponMetaReq) Field2DeepEqual(src string) bool {
 
-	if p.ValidStartTime != src {
+	if strings.Compare(p.ValidStartTime, src) != 0 {
 		return false
 	}
 	return true
 }
-func (p *AddCouponMetaReq) Field3DeepEqual(src int64) bool {
+func (p *AddCouponMetaReq) Field3DeepEqual(src string) bool {
 
-	if p.ValidEndTime != src {
+	if strings.Compare(p.ValidEndTime, src) != 0 {
 		return false
 	}
 	return true
@@ -2260,8 +2335,8 @@ func (p *DeleteCouponMetaResp) Field255DeepEqual(src *base.BaseResp) bool {
 type UpdateCouponMetaReq struct {
 	CouponMetaNo   int64          `thrift:"coupon_meta_no,1,required" frugal:"1,required,i64" json:"coupon_meta_no"`
 	Type           CouponMetaType `thrift:"type,2,required" frugal:"2,required,CouponMetaType" json:"type"`
-	ValidStartTime int64          `thrift:"valid_start_time,3,required" frugal:"3,required,i64" json:"valid_start_time"`
-	ValidEndTime   int64          `thrift:"valid_end_time,4,required" frugal:"4,required,i64" json:"valid_end_time"`
+	ValidStartTime string         `thrift:"valid_start_time,3,required" frugal:"3,required,string" json:"valid_start_time"`
+	ValidEndTime   string         `thrift:"valid_end_time,4,required" frugal:"4,required,string" json:"valid_end_time"`
 	Stock          int32          `thrift:"stock,5,required" frugal:"5,required,i32" json:"stock"`
 }
 
@@ -2280,11 +2355,11 @@ func (p *UpdateCouponMetaReq) GetType() (v CouponMetaType) {
 	return p.Type
 }
 
-func (p *UpdateCouponMetaReq) GetValidStartTime() (v int64) {
+func (p *UpdateCouponMetaReq) GetValidStartTime() (v string) {
 	return p.ValidStartTime
 }
 
-func (p *UpdateCouponMetaReq) GetValidEndTime() (v int64) {
+func (p *UpdateCouponMetaReq) GetValidEndTime() (v string) {
 	return p.ValidEndTime
 }
 
@@ -2297,10 +2372,10 @@ func (p *UpdateCouponMetaReq) SetCouponMetaNo(val int64) {
 func (p *UpdateCouponMetaReq) SetType(val CouponMetaType) {
 	p.Type = val
 }
-func (p *UpdateCouponMetaReq) SetValidStartTime(val int64) {
+func (p *UpdateCouponMetaReq) SetValidStartTime(val string) {
 	p.ValidStartTime = val
 }
-func (p *UpdateCouponMetaReq) SetValidEndTime(val int64) {
+func (p *UpdateCouponMetaReq) SetValidEndTime(val string) {
 	p.ValidEndTime = val
 }
 func (p *UpdateCouponMetaReq) SetStock(val int32) {
@@ -2358,7 +2433,7 @@ func (p *UpdateCouponMetaReq) Read(iprot thrift.TProtocol) (err error) {
 				goto SkipFieldError
 			}
 		case 3:
-			if fieldTypeId == thrift.I64 {
+			if fieldTypeId == thrift.STRING {
 				if err = p.ReadField3(iprot); err != nil {
 					goto ReadFieldError
 				}
@@ -2367,7 +2442,7 @@ func (p *UpdateCouponMetaReq) Read(iprot thrift.TProtocol) (err error) {
 				goto SkipFieldError
 			}
 		case 4:
-			if fieldTypeId == thrift.I64 {
+			if fieldTypeId == thrift.STRING {
 				if err = p.ReadField4(iprot); err != nil {
 					goto ReadFieldError
 				}
@@ -2463,8 +2538,8 @@ func (p *UpdateCouponMetaReq) ReadField2(iprot thrift.TProtocol) error {
 }
 func (p *UpdateCouponMetaReq) ReadField3(iprot thrift.TProtocol) error {
 
-	var _field int64
-	if v, err := iprot.ReadI64(); err != nil {
+	var _field string
+	if v, err := iprot.ReadString(); err != nil {
 		return err
 	} else {
 		_field = v
@@ -2474,8 +2549,8 @@ func (p *UpdateCouponMetaReq) ReadField3(iprot thrift.TProtocol) error {
 }
 func (p *UpdateCouponMetaReq) ReadField4(iprot thrift.TProtocol) error {
 
-	var _field int64
-	if v, err := iprot.ReadI64(); err != nil {
+	var _field string
+	if v, err := iprot.ReadString(); err != nil {
 		return err
 	} else {
 		_field = v
@@ -2574,10 +2649,10 @@ WriteFieldEndError:
 }
 
 func (p *UpdateCouponMetaReq) writeField3(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("valid_start_time", thrift.I64, 3); err != nil {
+	if err = oprot.WriteFieldBegin("valid_start_time", thrift.STRING, 3); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteI64(p.ValidStartTime); err != nil {
+	if err := oprot.WriteString(p.ValidStartTime); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -2591,10 +2666,10 @@ WriteFieldEndError:
 }
 
 func (p *UpdateCouponMetaReq) writeField4(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("valid_end_time", thrift.I64, 4); err != nil {
+	if err = oprot.WriteFieldBegin("valid_end_time", thrift.STRING, 4); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteI64(p.ValidEndTime); err != nil {
+	if err := oprot.WriteString(p.ValidEndTime); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -2670,16 +2745,16 @@ func (p *UpdateCouponMetaReq) Field2DeepEqual(src CouponMetaType) bool {
 	}
 	return true
 }
-func (p *UpdateCouponMetaReq) Field3DeepEqual(src int64) bool {
+func (p *UpdateCouponMetaReq) Field3DeepEqual(src string) bool {
 
-	if p.ValidStartTime != src {
+	if strings.Compare(p.ValidStartTime, src) != 0 {
 		return false
 	}
 	return true
 }
-func (p *UpdateCouponMetaReq) Field4DeepEqual(src int64) bool {
+func (p *UpdateCouponMetaReq) Field4DeepEqual(src string) bool {
 
-	if p.ValidEndTime != src {
+	if strings.Compare(p.ValidEndTime, src) != 0 {
 		return false
 	}
 	return true

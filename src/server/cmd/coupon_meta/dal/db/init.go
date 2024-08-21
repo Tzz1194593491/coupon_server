@@ -2,6 +2,7 @@ package db
 
 import (
 	"github.com/Tzz1194593491/coupon_server/pkg/constants"
+	"github.com/cloudwego/kitex/pkg/klog"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	gormopentracing "gorm.io/plugin/opentracing"
@@ -26,5 +27,11 @@ func Init() {
 
 	if err = DB.Use(gormopentracing.New()); err != nil {
 		log.Fatal(err)
+	}
+
+	err = DB.AutoMigrate(&CouponMeta{})
+	if err != nil {
+		klog.Fatal(err)
+		return
 	}
 }

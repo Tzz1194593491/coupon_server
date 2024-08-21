@@ -6,5 +6,12 @@ import (
 )
 
 func couponMetaRouterInit(r *server.Hertz) {
-	r.POST("/CouponMeta/Add", handlers.AddCouponMeta)
+	v1 := r.Group("/v1")
+	couponMeta := v1.Group("/CouponMeta")
+	{
+		couponMeta.POST("", handlers.AddCouponMeta)
+		couponMeta.DELETE("", handlers.DeleteCouponMeta)
+		couponMeta.PUT("", handlers.UpdateCouponMeta)
+		couponMeta.GET("/ByPage", handlers.GetCouponMetaByPage)
+	}
 }

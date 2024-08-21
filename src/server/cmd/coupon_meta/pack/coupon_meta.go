@@ -3,6 +3,7 @@ package pack
 import (
 	"github.com/Tzz1194593491/coupon_server/cmd/coupon_meta/dal/db"
 	"github.com/Tzz1194593491/coupon_server/kitex_gen/com/tang/coupon_server/coupon_meta"
+	"github.com/Tzz1194593491/coupon_server/pkg/utils"
 )
 
 func CouponMeta(c *db.CouponMeta) *coupon_meta.CouponMeta {
@@ -10,15 +11,15 @@ func CouponMeta(c *db.CouponMeta) *coupon_meta.CouponMeta {
 		return nil
 	}
 	return &coupon_meta.CouponMeta{
-		CouponMetaNo:   c.CouponMetaNo,
-		Type:           c.CouponMetaType,
-		ValidStartTime: c.ValidStartTime.Unix(),
-		ValidEndTime:   c.ValidEndTime.Unix(),
-		Status:         c.CouponMetaStatus,
+		CouponMetaNo:   *c.CouponMetaNo,
+		Type:           *c.CouponMetaType,
+		ValidStartTime: utils.TimeToString(c.ValidStartTime),
+		ValidEndTime:   c.ValidEndTime.String(),
+		Status:         *c.CouponMetaStatus,
 		Stock:          c.CouponMetaStock,
-		CreateTime:     c.CreateTime.Unix(),
-		UpdateTime:     c.UpdateTime.Unix(),
-		DeleteTime:     c.Deleted.Time.Unix(),
+		CreateTime:     utils.TimeToString(c.CreatedAt),
+		UpdateTime:     utils.TimeToString(c.UpdatedAt),
+		DeleteTime:     utils.TimeToString(c.DeletedAt.Time),
 	}
 }
 

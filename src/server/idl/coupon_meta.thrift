@@ -15,19 +15,19 @@ enum CouponStatus {
 struct CouponMeta {
     1: i64 coupon_meta_no
     2: CouponMetaType type
-    3: i64 valid_start_time
-    4: i64 valid_end_time
+    3: string valid_start_time
+    4: string valid_end_time
     5: CouponStatus status
     6: i32 stock
-    7: i64 create_time
-    8: i64 update_time
-    9: i64 delete_time
+    7: string create_time
+    8: string update_time
+    9: string delete_time
 }
 
 // 查询券模板功能
 
 struct GetCouponMetaReq {
-    1: required i64 coupon_meta_no
+    1: optional i64 coupon_meta_no
     2: optional CouponMetaType type
     3: optional CouponStatus status
     255: required base.BasePageInfo base_info
@@ -35,6 +35,7 @@ struct GetCouponMetaReq {
 
 struct GetCouponMetaResp {
     1: list<CouponMeta> coupon_meta
+    2: base.BasePageInfo base_info
     255: base.BaseResp baseResp
 }
 
@@ -42,8 +43,8 @@ struct GetCouponMetaResp {
 
 struct AddCouponMetaReq {
     1: required CouponMetaType type
-    2: required i64 valid_start_time
-    3: required i64 valid_end_time
+    2: required string valid_start_time
+    3: required string valid_end_time
     4: required i32 stock
 }
 
@@ -66,8 +67,8 @@ struct DeleteCouponMetaResp {
 struct UpdateCouponMetaReq {
     1: required i64 coupon_meta_no // 券模板id
     2: required CouponMetaType type
-    3: required i64 valid_start_time
-    4: required i64 valid_end_time
+    3: required string valid_start_time
+    4: required string valid_end_time
     5: required i32 stock
 }
 
