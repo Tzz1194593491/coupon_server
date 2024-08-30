@@ -1,0 +1,82 @@
+# 描述 Compose 文件的版本信息
+version: "3.8"
+
+# 定义服务，可以多个
+services:
+  redis-cluster:
+    image: redis
+    container_name: redis-cluster
+    depends_on:
+      - redis-6379
+      - redis-6380
+      - redis-6381
+      - redis-6382
+      - redis-6383
+      - redis-6384
+    command: redis-cli -a 1234 --cluster create redis-6379:6379 redis-6380:6380 redis-6381:6381 redis-6382:6382 redis-6383:6383 redis-6384:6384 --cluster-replicas 1 --cluster-yes
+
+  redis-6379: # 服务名称
+    image: redis # 创建容器时所需的镜像
+    container_name: redis-6379 # 容器名称
+    restart: always # 容器总是重新启动
+    volumes: # 数据卷，目录挂载
+      - /Users/antontang/Code/Backend/WebServer/redis/node-6379/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - /Users/antontang/Code/Backend/WebServer/redis/node-6379/data:/data
+    ports:
+      - "6379:6379"
+    command: redis-server /usr/local/etc/redis/redis.conf # 覆盖容器启动后默认执行的命令
+
+  redis-6380:
+    image: redis
+    container_name: redis-6380
+    volumes:
+      - /Users/antontang/Code/Backend/WebServer/redis/node-6380/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - /Users/antontang/Code/Backend/WebServer/redis/node-6380/data:/data
+    ports:
+      - "6380:6380"
+      - "16380:16380"
+    command: redis-server /usr/local/etc/redis/redis.conf
+
+  redis-6381:
+    image: redis
+    container_name: redis-6381
+    volumes:
+      - /Users/antontang/Code/Backend/WebServer/redis/node-6381/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - /Users/antontang/Code/Backend/WebServer/redis/node-6381/data:/data
+    ports:
+      - "6381:6381"
+      - "16381:16381"
+    command: redis-server /usr/local/etc/redis/redis.conf
+
+  redis-6382:
+    image: redis
+    container_name: redis-6382
+    volumes:
+      - /Users/antontang/Code/Backend/WebServer/redis/node-6382/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - /Users/antontang/Code/Backend/WebServer/redis/node-6382/data:/data
+    ports:
+      - "6382:6382"
+      - "16382:16382"
+    command: redis-server /usr/local/etc/redis/redis.conf
+
+  redis-6383:
+    image: redis
+    container_name: redis-6383
+    volumes:
+      - /Users/antontang/Code/Backend/WebServer/redis/node-6383/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - /Users/antontang/Code/Backend/WebServer/redis/node-6383/data:/data
+    ports:
+      - "6383:6383"
+      - "16383:16383"
+    command: redis-server /usr/local/etc/redis/redis.conf
+
+  redis-6384:
+    image: redis
+    container_name: redis-6384
+    volumes:
+      - /Users/antontang/Code/Backend/WebServer/redis/node-6384/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - /Users/antontang/Code/Backend/WebServer/redis/node-6384/data:/data
+    ports:
+      - "6384:6384"
+      - "16384:16384"
+    command: redis-server /usr/local/etc/redis/redis.conf

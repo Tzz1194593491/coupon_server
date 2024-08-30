@@ -77,7 +77,7 @@ RPC框架在本系统的作用：作为一个下游模块，供上游模块调�
 2. 管理券的状态（过期，已使用）
 3. 查询券记录
 
-## 4.数据库设计
+## 4.数据库相关
 
 ### 1.数据结构ER图
 
@@ -125,7 +125,11 @@ CREATE INDEX `promotion_coupon_record_index_0`
  docker run -p 3306:3306 --name JY_mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql
 ```
 
-## 4.功能流程
+### 4.Redis搭建
+
+使用shell/redis下的脚本进行搭建，搭建三主三从的redis集群
+
+## 5.功能流程
 
 # 使用工具
 
