@@ -5,6 +5,7 @@ import (
 	"errors"
 	"github.com/Tzz1194593491/coupon_server/kitex_gen/com/tang/coupon_server/coupon_meta"
 	"github.com/Tzz1194593491/coupon_server/pkg/constants"
+	"github.com/yitter/idgenerator-go/idgen"
 	"gorm.io/gorm"
 	"time"
 )
@@ -23,6 +24,12 @@ type CouponMeta struct {
 
 func (c *CouponMeta) TableName() string {
 	return constants.CouponMetaTableName
+}
+
+func (c *CouponMeta) BeforeCreate(tx *gorm.DB) (error error) {
+	id := idgen.NextId()
+	c.CouponMetaNo = &id
+	return
 }
 
 func GetCouponMetaByPage(ctx context.Context, pageInfo *constants.PageInfo, couponMeta *CouponMeta) (res []*CouponMeta, err error) {

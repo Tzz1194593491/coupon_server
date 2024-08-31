@@ -42,10 +42,11 @@ struct GetCouponMetaResp {
 // 增加券模板功能
 
 struct AddCouponMetaReq {
-    1: required CouponMetaType type
+    1: required CouponMetaType type (vt.defined_only = "true")
     2: required string valid_start_time
     3: required string valid_end_time
-    4: required i32 stock
+    4: required i32 stock (vt.gt = "0")
+    5: required bool is_sharding
 }
 
 struct AddCouponMetaResp {
@@ -66,10 +67,10 @@ struct DeleteCouponMetaResp {
 
 struct UpdateCouponMetaReq {
     1: required i64 coupon_meta_no // 券模板id
-    2: required CouponMetaType type
+    2: required CouponMetaType type (vt.in = "0",vt.in = "1")
     3: required string valid_start_time
     4: required string valid_end_time
-    5: required i32 stock
+    5: required i32 stock (vt.gt = "0")
 }
 
 struct UpdateCouponMetaResp {
@@ -83,7 +84,7 @@ struct GetCouponMetaIsValidReq {
 }
 
 struct GetCouponMetaIsValidResp {
-    1: bool is_valid // 是否有效
+    1: bool coupon_meta_is_valid // 是否有效
     255: base.BaseResp baseResp
 }
 

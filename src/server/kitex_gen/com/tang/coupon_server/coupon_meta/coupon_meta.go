@@ -1459,6 +1459,7 @@ type AddCouponMetaReq struct {
 	ValidStartTime string         `thrift:"valid_start_time,2,required" frugal:"2,required,string" json:"valid_start_time"`
 	ValidEndTime   string         `thrift:"valid_end_time,3,required" frugal:"3,required,string" json:"valid_end_time"`
 	Stock          int32          `thrift:"stock,4,required" frugal:"4,required,i32" json:"stock"`
+	IsSharding     bool           `thrift:"is_sharding,5,required" frugal:"5,required,bool" json:"is_sharding"`
 }
 
 func NewAddCouponMetaReq() *AddCouponMetaReq {
@@ -1483,6 +1484,10 @@ func (p *AddCouponMetaReq) GetValidEndTime() (v string) {
 func (p *AddCouponMetaReq) GetStock() (v int32) {
 	return p.Stock
 }
+
+func (p *AddCouponMetaReq) GetIsSharding() (v bool) {
+	return p.IsSharding
+}
 func (p *AddCouponMetaReq) SetType(val CouponMetaType) {
 	p.Type = val
 }
@@ -1495,12 +1500,16 @@ func (p *AddCouponMetaReq) SetValidEndTime(val string) {
 func (p *AddCouponMetaReq) SetStock(val int32) {
 	p.Stock = val
 }
+func (p *AddCouponMetaReq) SetIsSharding(val bool) {
+	p.IsSharding = val
+}
 
 var fieldIDToName_AddCouponMetaReq = map[int16]string{
 	1: "type",
 	2: "valid_start_time",
 	3: "valid_end_time",
 	4: "stock",
+	5: "is_sharding",
 }
 
 func (p *AddCouponMetaReq) Read(iprot thrift.TProtocol) (err error) {
@@ -1511,6 +1520,7 @@ func (p *AddCouponMetaReq) Read(iprot thrift.TProtocol) (err error) {
 	var issetValidStartTime bool = false
 	var issetValidEndTime bool = false
 	var issetStock bool = false
+	var issetIsSharding bool = false
 
 	if _, err = iprot.ReadStructBegin(); err != nil {
 		goto ReadStructBeginError
@@ -1562,6 +1572,15 @@ func (p *AddCouponMetaReq) Read(iprot thrift.TProtocol) (err error) {
 			} else if err = iprot.Skip(fieldTypeId); err != nil {
 				goto SkipFieldError
 			}
+		case 5:
+			if fieldTypeId == thrift.BOOL {
+				if err = p.ReadField5(iprot); err != nil {
+					goto ReadFieldError
+				}
+				issetIsSharding = true
+			} else if err = iprot.Skip(fieldTypeId); err != nil {
+				goto SkipFieldError
+			}
 		default:
 			if err = iprot.Skip(fieldTypeId); err != nil {
 				goto SkipFieldError
@@ -1592,6 +1611,11 @@ func (p *AddCouponMetaReq) Read(iprot thrift.TProtocol) (err error) {
 
 	if !issetStock {
 		fieldId = 4
+		goto RequiredFieldNotSetError
+	}
+
+	if !issetIsSharding {
+		fieldId = 5
 		goto RequiredFieldNotSetError
 	}
 	return nil
@@ -1656,6 +1680,17 @@ func (p *AddCouponMetaReq) ReadField4(iprot thrift.TProtocol) error {
 	p.Stock = _field
 	return nil
 }
+func (p *AddCouponMetaReq) ReadField5(iprot thrift.TProtocol) error {
+
+	var _field bool
+	if v, err := iprot.ReadBool(); err != nil {
+		return err
+	} else {
+		_field = v
+	}
+	p.IsSharding = _field
+	return nil
+}
 
 func (p *AddCouponMetaReq) Write(oprot thrift.TProtocol) (err error) {
 	var fieldId int16
@@ -1677,6 +1712,10 @@ func (p *AddCouponMetaReq) Write(oprot thrift.TProtocol) (err error) {
 		}
 		if err = p.writeField4(oprot); err != nil {
 			fieldId = 4
+			goto WriteFieldError
+		}
+		if err = p.writeField5(oprot); err != nil {
+			fieldId = 5
 			goto WriteFieldError
 		}
 	}
@@ -1765,6 +1804,23 @@ WriteFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 4 end error: ", p), err)
 }
 
+func (p *AddCouponMetaReq) writeField5(oprot thrift.TProtocol) (err error) {
+	if err = oprot.WriteFieldBegin("is_sharding", thrift.BOOL, 5); err != nil {
+		goto WriteFieldBeginError
+	}
+	if err := oprot.WriteBool(p.IsSharding); err != nil {
+		return err
+	}
+	if err = oprot.WriteFieldEnd(); err != nil {
+		goto WriteFieldEndError
+	}
+	return nil
+WriteFieldBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 5 begin error: ", p), err)
+WriteFieldEndError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 5 end error: ", p), err)
+}
+
 func (p *AddCouponMetaReq) String() string {
 	if p == nil {
 		return "<nil>"
@@ -1789,6 +1845,9 @@ func (p *AddCouponMetaReq) DeepEqual(ano *AddCouponMetaReq) bool {
 		return false
 	}
 	if !p.Field4DeepEqual(ano.Stock) {
+		return false
+	}
+	if !p.Field5DeepEqual(ano.IsSharding) {
 		return false
 	}
 	return true
@@ -1818,6 +1877,13 @@ func (p *AddCouponMetaReq) Field3DeepEqual(src string) bool {
 func (p *AddCouponMetaReq) Field4DeepEqual(src int32) bool {
 
 	if p.Stock != src {
+		return false
+	}
+	return true
+}
+func (p *AddCouponMetaReq) Field5DeepEqual(src bool) bool {
+
+	if p.IsSharding != src {
 		return false
 	}
 	return true
@@ -3108,8 +3174,8 @@ func (p *GetCouponMetaIsValidReq) Field1DeepEqual(src int64) bool {
 }
 
 type GetCouponMetaIsValidResp struct {
-	IsValid  bool           `thrift:"is_valid,1" frugal:"1,default,bool" json:"is_valid"`
-	BaseResp *base.BaseResp `thrift:"baseResp,255" frugal:"255,default,base.BaseResp" json:"baseResp"`
+	CouponMetaIsValid bool           `thrift:"coupon_meta_is_valid,1" frugal:"1,default,bool" json:"coupon_meta_is_valid"`
+	BaseResp          *base.BaseResp `thrift:"baseResp,255" frugal:"255,default,base.BaseResp" json:"baseResp"`
 }
 
 func NewGetCouponMetaIsValidResp() *GetCouponMetaIsValidResp {
@@ -3119,8 +3185,8 @@ func NewGetCouponMetaIsValidResp() *GetCouponMetaIsValidResp {
 func (p *GetCouponMetaIsValidResp) InitDefault() {
 }
 
-func (p *GetCouponMetaIsValidResp) GetIsValid() (v bool) {
-	return p.IsValid
+func (p *GetCouponMetaIsValidResp) GetCouponMetaIsValid() (v bool) {
+	return p.CouponMetaIsValid
 }
 
 var GetCouponMetaIsValidResp_BaseResp_DEFAULT *base.BaseResp
@@ -3131,15 +3197,15 @@ func (p *GetCouponMetaIsValidResp) GetBaseResp() (v *base.BaseResp) {
 	}
 	return p.BaseResp
 }
-func (p *GetCouponMetaIsValidResp) SetIsValid(val bool) {
-	p.IsValid = val
+func (p *GetCouponMetaIsValidResp) SetCouponMetaIsValid(val bool) {
+	p.CouponMetaIsValid = val
 }
 func (p *GetCouponMetaIsValidResp) SetBaseResp(val *base.BaseResp) {
 	p.BaseResp = val
 }
 
 var fieldIDToName_GetCouponMetaIsValidResp = map[int16]string{
-	1:   "is_valid",
+	1:   "coupon_meta_is_valid",
 	255: "baseResp",
 }
 
@@ -3219,7 +3285,7 @@ func (p *GetCouponMetaIsValidResp) ReadField1(iprot thrift.TProtocol) error {
 	} else {
 		_field = v
 	}
-	p.IsValid = _field
+	p.CouponMetaIsValid = _field
 	return nil
 }
 func (p *GetCouponMetaIsValidResp) ReadField255(iprot thrift.TProtocol) error {
@@ -3264,10 +3330,10 @@ WriteStructEndError:
 }
 
 func (p *GetCouponMetaIsValidResp) writeField1(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("is_valid", thrift.BOOL, 1); err != nil {
+	if err = oprot.WriteFieldBegin("coupon_meta_is_valid", thrift.BOOL, 1); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteBool(p.IsValid); err != nil {
+	if err := oprot.WriteBool(p.CouponMetaIsValid); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -3311,7 +3377,7 @@ func (p *GetCouponMetaIsValidResp) DeepEqual(ano *GetCouponMetaIsValidResp) bool
 	} else if p == nil || ano == nil {
 		return false
 	}
-	if !p.Field1DeepEqual(ano.IsValid) {
+	if !p.Field1DeepEqual(ano.CouponMetaIsValid) {
 		return false
 	}
 	if !p.Field255DeepEqual(ano.BaseResp) {
@@ -3322,7 +3388,7 @@ func (p *GetCouponMetaIsValidResp) DeepEqual(ano *GetCouponMetaIsValidResp) bool
 
 func (p *GetCouponMetaIsValidResp) Field1DeepEqual(src bool) bool {
 
-	if p.IsValid != src {
+	if p.CouponMetaIsValid != src {
 		return false
 	}
 	return true

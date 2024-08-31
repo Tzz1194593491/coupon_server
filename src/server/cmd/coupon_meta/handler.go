@@ -15,8 +15,14 @@ type CouponMetaServiceImpl struct{}
 // GetCouponMeta implements the CouponMetaServiceImpl interface.
 func (s *CouponMetaServiceImpl) GetCouponMeta(ctx context.Context, req *coupon_meta.GetCouponMetaReq) (resp *coupon_meta.GetCouponMetaResp, err error) {
 	resp = new(coupon_meta.GetCouponMetaResp)
+	klog.Info(req)
+	err = req.IsValid()
+	if err != nil {
+		return nil, err
+	}
 	res, err := service.NewManageCouponMeta(ctx).GetManageCouponMetaByPage(req)
 	if err != nil {
+		klog.Error(err)
 		resp.BaseResp = pack.Fail(business_code.BusinessCode_GET_FAIL)
 		return nil, err
 	}
@@ -30,6 +36,10 @@ func (s *CouponMetaServiceImpl) GetCouponMeta(ctx context.Context, req *coupon_m
 func (s *CouponMetaServiceImpl) AddCouponMeta(ctx context.Context, req *coupon_meta.AddCouponMetaReq) (resp *coupon_meta.AddCouponMetaResp, err error) {
 	resp = new(coupon_meta.AddCouponMetaResp)
 	klog.Info(req)
+	err = req.IsValid()
+	if err != nil {
+		return nil, err
+	}
 	err = service.NewManageCouponMeta(ctx).AddManageCouponMeta(req)
 	if err != nil {
 		klog.Error(err)
@@ -44,9 +54,14 @@ func (s *CouponMetaServiceImpl) AddCouponMeta(ctx context.Context, req *coupon_m
 // DeleteCouponMeta implements the CouponMetaServiceImpl interface.
 func (s *CouponMetaServiceImpl) DeleteCouponMeta(ctx context.Context, req *coupon_meta.DeleteCouponMetaReq) (resp *coupon_meta.DeleteCouponMetaResp, err error) {
 	resp = new(coupon_meta.DeleteCouponMetaResp)
-
+	klog.Info(req)
+	err = req.IsValid()
+	if err != nil {
+		return nil, err
+	}
 	err = service.NewManageCouponMeta(ctx).DeleteManageCouponMeta(req)
 	if err != nil {
+		klog.Error(err)
 		resp.BaseResp = pack.Fail(business_code.BusinessCode_DELETE_FAIL)
 		return resp, nil
 	}
@@ -57,9 +72,14 @@ func (s *CouponMetaServiceImpl) DeleteCouponMeta(ctx context.Context, req *coupo
 // UpdateCouponMeta implements the CouponMetaServiceImpl interface.
 func (s *CouponMetaServiceImpl) UpdateCouponMeta(ctx context.Context, req *coupon_meta.UpdateCouponMetaReq) (resp *coupon_meta.UpdateCouponMetaResp, err error) {
 	resp = new(coupon_meta.UpdateCouponMetaResp)
-
+	klog.Info(req)
+	err = req.IsValid()
+	if err != nil {
+		return nil, err
+	}
 	err = service.NewManageCouponMeta(ctx).UpdateManageCouponMeta(req)
 	if err != nil {
+		klog.Error(err)
 		resp.BaseResp = pack.Fail(business_code.BusinessCode_UPDATE_FAIL)
 		return resp, nil
 	}
@@ -70,8 +90,12 @@ func (s *CouponMetaServiceImpl) UpdateCouponMeta(ctx context.Context, req *coupo
 // GetCouponMetaIsValid implements the CouponMetaServiceImpl interface.
 func (s *CouponMetaServiceImpl) GetCouponMetaIsValid(ctx context.Context, req *coupon_meta.GetCouponMetaIsValidReq) (resp *coupon_meta.GetCouponMetaIsValidResp, err error) {
 	resp = new(coupon_meta.GetCouponMetaIsValidResp)
-
-	resp.IsValid = service.NewStatusCouponMeta(ctx).GetStatusCouponMetaIsValid(req)
+	klog.Info(req)
+	err = req.IsValid()
+	if err != nil {
+		return nil, err
+	}
+	resp.CouponMetaIsValid = service.NewStatusCouponMeta(ctx).GetStatusCouponMetaIsValid(req)
 	resp.BaseResp = pack.Success(business_code.BusinessCode_SUCCESS)
 	return resp, nil
 }
@@ -79,7 +103,11 @@ func (s *CouponMetaServiceImpl) GetCouponMetaIsValid(ctx context.Context, req *c
 // GetCouponMetaStock implements the CouponMetaServiceImpl interface.
 func (s *CouponMetaServiceImpl) GetCouponMetaStock(ctx context.Context, req *coupon_meta.GetCouponMetaStockReq) (resp *coupon_meta.GetCouponMetaStockResp, err error) {
 	resp = new(coupon_meta.GetCouponMetaStockResp)
-
+	klog.Info(req)
+	err = req.IsValid()
+	if err != nil {
+		return nil, err
+	}
 	stock := service.NewStatusCouponMeta(ctx).GetStatusCouponMetaStock(req)
 	resp.BaseResp = pack.Success(business_code.BusinessCode_SUCCESS)
 	resp.Stock = stock

@@ -9,6 +9,6 @@ struct BaseResp {
 }
 
 struct BasePageInfo {
-    1: i32 page_num
-    2: i32 page_size
+    1: i32 page_num (vt.ge = "1")
+    2: i32 page_size (vt.ge = "1")
 }
