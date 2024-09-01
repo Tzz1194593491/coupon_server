@@ -12,6 +12,10 @@ const (
 	CouponMetaServiceName = "coupon_meta"
 	CouponMetaServicePort = "8889"
 
+	CouponRecordTableName   = "promotion_coupon_record"
+	CouponRecordServiceName = "coupon_record"
+	CouponRecordServicePort = "8989"
+
 	ApiServicePort = "8080"
 	ApiServiceName = "api"
 )

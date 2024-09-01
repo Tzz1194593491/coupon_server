@@ -87,17 +87,25 @@ func (s *CouponMetaServiceImpl) UpdateCouponMeta(ctx context.Context, req *coupo
 	return resp, nil
 }
 
-// GetCouponValidMetaList implements the CouponMetaServiceImpl interface.
-func (s *CouponMetaServiceImpl) GetCouponValidMetaList(ctx context.Context, req *coupon_meta.GetCouponValidMetaListReq) (resp *coupon_meta.GetCouponValidMetaListResp, err error) {
-	resp = new(coupon_meta.GetCouponValidMetaListResp)
+// GetCouponValidMetaInfo implements the CouponMetaServiceImpl interface.
+func (s *CouponMetaServiceImpl) GetCouponValidMetaInfo(ctx context.Context, req *coupon_meta.GetCouponValidMetaInfoReq) (resp *coupon_meta.GetCouponValidMetaInfoResp, err error) {
+	resp = new(coupon_meta.GetCouponValidMetaInfoResp)
 	klog.Info(req)
-	dataMap, err := service.NewManageCouponMeta(ctx).GetCouponValidMetaList(req)
+	info, err := service.NewManageCouponMeta(ctx).GetCouponValidMetaInfo(req)
 	if err != nil {
 		klog.Error(err)
 		resp.BaseResp = pack.Fail(business_code.BusinessCode_UPDATE_FAIL)
 		return resp, err
 	}
-	resp.CouponMetaMap = dataMap
+	resp.CouponMetaInfo = info
 	resp.BaseResp = pack.Success(business_code.BusinessCode_SUCCESS)
+	return resp, nil
+}
+
+// TryReduceCouponStock implements the CouponMetaServiceImpl interface.
+func (s *CouponMetaServiceImpl) TryReduceCouponStock(ctx context.Context, req *coupon_meta.TryReduceCouponStockReq) (resp *coupon_meta.TryReduceCouponStockResp, err error) {
+	resp = new(coupon_meta.TryReduceCouponStockResp)
+	success := service.NewManageCouponMeta(ctx).TryReduceCouponStock(req)
+	resp.IsSuccess = success
 	return resp, nil
 }

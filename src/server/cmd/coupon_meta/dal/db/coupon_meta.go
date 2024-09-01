@@ -55,10 +55,10 @@ func GetCouponMetaById(ctx context.Context, couponMeta *CouponMeta) (res *Coupon
 	return res, nil
 }
 
-func AddCouponMeta(ctx context.Context, couponMeta *CouponMeta) (err error) {
-	tx := DB.WithContext(ctx).Create(couponMeta)
-	if tx.Error != nil {
-		return tx.Error
+func AddCouponMeta(ctx context.Context, tx *gorm.DB, couponMeta *CouponMeta) (err error) {
+	res := tx.WithContext(ctx).Create(couponMeta)
+	if res.Error != nil {
+		return res.Error
 	}
 	return nil
 }

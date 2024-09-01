@@ -10,4 +10,5 @@ func Init(r *server.Hertz) {
 	rpc.Init()
 	// 加载路由
 	couponMetaRouterInit(r)
+	couponRecordRouterInit(r)
 }

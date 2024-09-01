@@ -2309,7 +2309,7 @@ func (p *UpdateCouponMetaResp) field255Length() int {
 	return l
 }
 
-func (p *GetCouponValidMetaListReq) FastRead(buf []byte) (int, error) {
+func (p *GetCouponValidMetaInfoReq) FastRead(buf []byte) (int, error) {
 	var err error
 	var offset int
 	var l int
@@ -2377,7 +2377,7 @@ ReadStructBeginError:
 ReadFieldBeginError:
 	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d begin error: ", p, fieldId), err)
 ReadFieldError:
-	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_GetCouponValidMetaListReq[fieldId]), err)
+	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_GetCouponValidMetaInfoReq[fieldId]), err)
 SkipFieldError:
 	return offset, thrift.PrependError(fmt.Sprintf("%T field %d skip type %d error: ", p, fieldId, fieldTypeId), err)
 ReadFieldEndError:
@@ -2385,10 +2385,10 @@ ReadFieldEndError:
 ReadStructEndError:
 	return offset, thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
 RequiredFieldNotSetError:
-	return offset, thrift.NewTProtocolExceptionWithType(thrift.INVALID_DATA, fmt.Errorf("required field %s is not set", fieldIDToName_GetCouponValidMetaListReq[fieldId]))
+	return offset, thrift.NewTProtocolExceptionWithType(thrift.INVALID_DATA, fmt.Errorf("required field %s is not set", fieldIDToName_GetCouponValidMetaInfoReq[fieldId]))
 }
 
-func (p *GetCouponValidMetaListReq) FastReadField1(buf []byte) (int, error) {
+func (p *GetCouponValidMetaInfoReq) FastReadField1(buf []byte) (int, error) {
 	offset := 0
 
 	var _field int64
@@ -2405,13 +2405,13 @@ func (p *GetCouponValidMetaListReq) FastReadField1(buf []byte) (int, error) {
 }
 
 // for compatibility
-func (p *GetCouponValidMetaListReq) FastWrite(buf []byte) int {
+func (p *GetCouponValidMetaInfoReq) FastWrite(buf []byte) int {
 	return 0
 }
 
-func (p *GetCouponValidMetaListReq) FastWriteNocopy(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+func (p *GetCouponValidMetaInfoReq) FastWriteNocopy(buf []byte, binaryWriter bthrift.BinaryWriter) int {
 	offset := 0
-	offset += bthrift.Binary.WriteStructBegin(buf[offset:], "GetCouponValidMetaListReq")
+	offset += bthrift.Binary.WriteStructBegin(buf[offset:], "GetCouponValidMetaInfoReq")
 	if p != nil {
 		offset += p.fastWriteField1(buf[offset:], binaryWriter)
 	}
@@ -2420,9 +2420,9 @@ func (p *GetCouponValidMetaListReq) FastWriteNocopy(buf []byte, binaryWriter bth
 	return offset
 }
 
-func (p *GetCouponValidMetaListReq) BLength() int {
+func (p *GetCouponValidMetaInfoReq) BLength() int {
 	l := 0
-	l += bthrift.Binary.StructBeginLength("GetCouponValidMetaListReq")
+	l += bthrift.Binary.StructBeginLength("GetCouponValidMetaInfoReq")
 	if p != nil {
 		l += p.field1Length()
 	}
@@ -2431,7 +2431,7 @@ func (p *GetCouponValidMetaListReq) BLength() int {
 	return l
 }
 
-func (p *GetCouponValidMetaListReq) fastWriteField1(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+func (p *GetCouponValidMetaInfoReq) fastWriteField1(buf []byte, binaryWriter bthrift.BinaryWriter) int {
 	offset := 0
 	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "coupon_meta_no", thrift.I64, 1)
 	offset += bthrift.Binary.WriteI64(buf[offset:], p.CouponMetaNo)
@@ -2439,7 +2439,7 @@ func (p *GetCouponValidMetaListReq) fastWriteField1(buf []byte, binaryWriter bth
 	return offset
 }
 
-func (p *GetCouponValidMetaListReq) field1Length() int {
+func (p *GetCouponValidMetaInfoReq) field1Length() int {
 	l := 0
 	l += bthrift.Binary.FieldBeginLength("coupon_meta_no", thrift.I64, 1)
 	l += bthrift.Binary.I64Length(p.CouponMetaNo)
@@ -2447,7 +2447,7 @@ func (p *GetCouponValidMetaListReq) field1Length() int {
 	return l
 }
 
-func (p *GetCouponValidMetaListResp) FastRead(buf []byte) (int, error) {
+func (p *GetCouponValidMetaInfoResp) FastRead(buf []byte) (int, error) {
 	var err error
 	var offset int
 	var l int
@@ -2472,6 +2472,20 @@ func (p *GetCouponValidMetaListResp) FastRead(buf []byte) (int, error) {
 		case 1:
 			if fieldTypeId == thrift.MAP {
 				l, err = p.FastReadField1(buf[offset:])
+				offset += l
+				if err != nil {
+					goto ReadFieldError
+				}
+			} else {
+				l, err = bthrift.Binary.Skip(buf[offset:], fieldTypeId)
+				offset += l
+				if err != nil {
+					goto SkipFieldError
+				}
+			}
+		case 2:
+			if fieldTypeId == thrift.STRUCT {
+				l, err = p.FastReadField2(buf[offset:])
 				offset += l
 				if err != nil {
 					goto ReadFieldError
@@ -2523,7 +2537,7 @@ ReadStructBeginError:
 ReadFieldBeginError:
 	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d begin error: ", p, fieldId), err)
 ReadFieldError:
-	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_GetCouponValidMetaListResp[fieldId]), err)
+	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_GetCouponValidMetaInfoResp[fieldId]), err)
 SkipFieldError:
 	return offset, thrift.PrependError(fmt.Sprintf("%T field %d skip type %d error: ", p, fieldId, fieldTypeId), err)
 ReadFieldEndError:
@@ -2532,7 +2546,7 @@ ReadStructEndError:
 	return offset, thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
 }
 
-func (p *GetCouponValidMetaListResp) FastReadField1(buf []byte) (int, error) {
+func (p *GetCouponValidMetaInfoResp) FastReadField1(buf []byte) (int, error) {
 	offset := 0
 
 	_, _, size, l, err := bthrift.Binary.ReadMapBegin(buf[offset:])
@@ -2572,7 +2586,19 @@ func (p *GetCouponValidMetaListResp) FastReadField1(buf []byte) (int, error) {
 	return offset, nil
 }
 
-func (p *GetCouponValidMetaListResp) FastReadField255(buf []byte) (int, error) {
+func (p *GetCouponValidMetaInfoResp) FastReadField2(buf []byte) (int, error) {
+	offset := 0
+	_field := NewCouponMeta()
+	if l, err := _field.FastRead(buf[offset:]); err != nil {
+		return offset, err
+	} else {
+		offset += l
+	}
+	p.CouponMetaInfo = _field
+	return offset, nil
+}
+
+func (p *GetCouponValidMetaInfoResp) FastReadField255(buf []byte) (int, error) {
 	offset := 0
 	_field := base.NewBaseResp()
 	if l, err := _field.FastRead(buf[offset:]); err != nil {
@@ -2585,15 +2611,16 @@ func (p *GetCouponValidMetaListResp) FastReadField255(buf []byte) (int, error) {
 }
 
 // for compatibility
-func (p *GetCouponValidMetaListResp) FastWrite(buf []byte) int {
+func (p *GetCouponValidMetaInfoResp) FastWrite(buf []byte) int {
 	return 0
 }
 
-func (p *GetCouponValidMetaListResp) FastWriteNocopy(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+func (p *GetCouponValidMetaInfoResp) FastWriteNocopy(buf []byte, binaryWriter bthrift.BinaryWriter) int {
 	offset := 0
-	offset += bthrift.Binary.WriteStructBegin(buf[offset:], "GetCouponValidMetaListResp")
+	offset += bthrift.Binary.WriteStructBegin(buf[offset:], "GetCouponValidMetaInfoResp")
 	if p != nil {
 		offset += p.fastWriteField1(buf[offset:], binaryWriter)
+		offset += p.fastWriteField2(buf[offset:], binaryWriter)
 		offset += p.fastWriteField255(buf[offset:], binaryWriter)
 	}
 	offset += bthrift.Binary.WriteFieldStop(buf[offset:])
@@ -2601,11 +2628,12 @@ func (p *GetCouponValidMetaListResp) FastWriteNocopy(buf []byte, binaryWriter bt
 	return offset
 }
 
-func (p *GetCouponValidMetaListResp) BLength() int {
+func (p *GetCouponValidMetaInfoResp) BLength() int {
 	l := 0
-	l += bthrift.Binary.StructBeginLength("GetCouponValidMetaListResp")
+	l += bthrift.Binary.StructBeginLength("GetCouponValidMetaInfoResp")
 	if p != nil {
 		l += p.field1Length()
+		l += p.field2Length()
 		l += p.field255Length()
 	}
 	l += bthrift.Binary.FieldStopLength()
@@ -2613,7 +2641,7 @@ func (p *GetCouponValidMetaListResp) BLength() int {
 	return l
 }
 
-func (p *GetCouponValidMetaListResp) fastWriteField1(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+func (p *GetCouponValidMetaInfoResp) fastWriteField1(buf []byte, binaryWriter bthrift.BinaryWriter) int {
 	offset := 0
 	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "coupon_meta_map", thrift.MAP, 1)
 	mapBeginOffset := offset
@@ -2630,7 +2658,15 @@ func (p *GetCouponValidMetaListResp) fastWriteField1(buf []byte, binaryWriter bt
 	return offset
 }
 
-func (p *GetCouponValidMetaListResp) fastWriteField255(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+func (p *GetCouponValidMetaInfoResp) fastWriteField2(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+	offset := 0
+	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "coupon_meta_info", thrift.STRUCT, 2)
+	offset += p.CouponMetaInfo.FastWriteNocopy(buf[offset:], binaryWriter)
+	offset += bthrift.Binary.WriteFieldEnd(buf[offset:])
+	return offset
+}
+
+func (p *GetCouponValidMetaInfoResp) fastWriteField255(buf []byte, binaryWriter bthrift.BinaryWriter) int {
 	offset := 0
 	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "baseResp", thrift.STRUCT, 255)
 	offset += p.BaseResp.FastWriteNocopy(buf[offset:], binaryWriter)
@@ -2638,7 +2674,7 @@ func (p *GetCouponValidMetaListResp) fastWriteField255(buf []byte, binaryWriter 
 	return offset
 }
 
-func (p *GetCouponValidMetaListResp) field1Length() int {
+func (p *GetCouponValidMetaInfoResp) field1Length() int {
 	l := 0
 	l += bthrift.Binary.FieldBeginLength("coupon_meta_map", thrift.MAP, 1)
 	l += bthrift.Binary.MapBeginLength(thrift.STRING, thrift.STRUCT, len(p.CouponMetaMap))
@@ -2652,10 +2688,286 @@ func (p *GetCouponValidMetaListResp) field1Length() int {
 	return l
 }
 
-func (p *GetCouponValidMetaListResp) field255Length() int {
+func (p *GetCouponValidMetaInfoResp) field2Length() int {
+	l := 0
+	l += bthrift.Binary.FieldBeginLength("coupon_meta_info", thrift.STRUCT, 2)
+	l += p.CouponMetaInfo.BLength()
+	l += bthrift.Binary.FieldEndLength()
+	return l
+}
+
+func (p *GetCouponValidMetaInfoResp) field255Length() int {
 	l := 0
 	l += bthrift.Binary.FieldBeginLength("baseResp", thrift.STRUCT, 255)
 	l += p.BaseResp.BLength()
+	l += bthrift.Binary.FieldEndLength()
+	return l
+}
+
+func (p *TryReduceCouponStockReq) FastRead(buf []byte) (int, error) {
+	var err error
+	var offset int
+	var l int
+	var fieldTypeId thrift.TType
+	var fieldId int16
+	var issetCouponMetaNo bool = false
+	_, l, err = bthrift.Binary.ReadStructBegin(buf)
+	offset += l
+	if err != nil {
+		goto ReadStructBeginError
+	}
+
+	for {
+		_, fieldTypeId, fieldId, l, err = bthrift.Binary.ReadFieldBegin(buf[offset:])
+		offset += l
+		if err != nil {
+			goto ReadFieldBeginError
+		}
+		if fieldTypeId == thrift.STOP {
+			break
+		}
+		switch fieldId {
+		case 1:
+			if fieldTypeId == thrift.I64 {
+				l, err = p.FastReadField1(buf[offset:])
+				offset += l
+				if err != nil {
+					goto ReadFieldError
+				}
+				issetCouponMetaNo = true
+			} else {
+				l, err = bthrift.Binary.Skip(buf[offset:], fieldTypeId)
+				offset += l
+				if err != nil {
+					goto SkipFieldError
+				}
+			}
+		default:
+			l, err = bthrift.Binary.Skip(buf[offset:], fieldTypeId)
+			offset += l
+			if err != nil {
+				goto SkipFieldError
+			}
+		}
+
+		l, err = bthrift.Binary.ReadFieldEnd(buf[offset:])
+		offset += l
+		if err != nil {
+			goto ReadFieldEndError
+		}
+	}
+	l, err = bthrift.Binary.ReadStructEnd(buf[offset:])
+	offset += l
+	if err != nil {
+		goto ReadStructEndError
+	}
+
+	if !issetCouponMetaNo {
+		fieldId = 1
+		goto RequiredFieldNotSetError
+	}
+	return offset, nil
+ReadStructBeginError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read struct begin error: ", p), err)
+ReadFieldBeginError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d begin error: ", p, fieldId), err)
+ReadFieldError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_TryReduceCouponStockReq[fieldId]), err)
+SkipFieldError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T field %d skip type %d error: ", p, fieldId, fieldTypeId), err)
+ReadFieldEndError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read field end error", p), err)
+ReadStructEndError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+RequiredFieldNotSetError:
+	return offset, thrift.NewTProtocolExceptionWithType(thrift.INVALID_DATA, fmt.Errorf("required field %s is not set", fieldIDToName_TryReduceCouponStockReq[fieldId]))
+}
+
+func (p *TryReduceCouponStockReq) FastReadField1(buf []byte) (int, error) {
+	offset := 0
+
+	var _field int64
+	if v, l, err := bthrift.Binary.ReadI64(buf[offset:]); err != nil {
+		return offset, err
+	} else {
+		offset += l
+
+		_field = v
+
+	}
+	p.CouponMetaNo = _field
+	return offset, nil
+}
+
+// for compatibility
+func (p *TryReduceCouponStockReq) FastWrite(buf []byte) int {
+	return 0
+}
+
+func (p *TryReduceCouponStockReq) FastWriteNocopy(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+	offset := 0
+	offset += bthrift.Binary.WriteStructBegin(buf[offset:], "TryReduceCouponStockReq")
+	if p != nil {
+		offset += p.fastWriteField1(buf[offset:], binaryWriter)
+	}
+	offset += bthrift.Binary.WriteFieldStop(buf[offset:])
+	offset += bthrift.Binary.WriteStructEnd(buf[offset:])
+	return offset
+}
+
+func (p *TryReduceCouponStockReq) BLength() int {
+	l := 0
+	l += bthrift.Binary.StructBeginLength("TryReduceCouponStockReq")
+	if p != nil {
+		l += p.field1Length()
+	}
+	l += bthrift.Binary.FieldStopLength()
+	l += bthrift.Binary.StructEndLength()
+	return l
+}
+
+func (p *TryReduceCouponStockReq) fastWriteField1(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+	offset := 0
+	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "coupon_meta_no", thrift.I64, 1)
+	offset += bthrift.Binary.WriteI64(buf[offset:], p.CouponMetaNo)
+	offset += bthrift.Binary.WriteFieldEnd(buf[offset:])
+	return offset
+}
+
+func (p *TryReduceCouponStockReq) field1Length() int {
+	l := 0
+	l += bthrift.Binary.FieldBeginLength("coupon_meta_no", thrift.I64, 1)
+	l += bthrift.Binary.I64Length(p.CouponMetaNo)
+	l += bthrift.Binary.FieldEndLength()
+	return l
+}
+
+func (p *TryReduceCouponStockResp) FastRead(buf []byte) (int, error) {
+	var err error
+	var offset int
+	var l int
+	var fieldTypeId thrift.TType
+	var fieldId int16
+	_, l, err = bthrift.Binary.ReadStructBegin(buf)
+	offset += l
+	if err != nil {
+		goto ReadStructBeginError
+	}
+
+	for {
+		_, fieldTypeId, fieldId, l, err = bthrift.Binary.ReadFieldBegin(buf[offset:])
+		offset += l
+		if err != nil {
+			goto ReadFieldBeginError
+		}
+		if fieldTypeId == thrift.STOP {
+			break
+		}
+		switch fieldId {
+		case 1:
+			if fieldTypeId == thrift.BOOL {
+				l, err = p.FastReadField1(buf[offset:])
+				offset += l
+				if err != nil {
+					goto ReadFieldError
+				}
+			} else {
+				l, err = bthrift.Binary.Skip(buf[offset:], fieldTypeId)
+				offset += l
+				if err != nil {
+					goto SkipFieldError
+				}
+			}
+		default:
+			l, err = bthrift.Binary.Skip(buf[offset:], fieldTypeId)
+			offset += l
+			if err != nil {
+				goto SkipFieldError
+			}
+		}
+
+		l, err = bthrift.Binary.ReadFieldEnd(buf[offset:])
+		offset += l
+		if err != nil {
+			goto ReadFieldEndError
+		}
+	}
+	l, err = bthrift.Binary.ReadStructEnd(buf[offset:])
+	offset += l
+	if err != nil {
+		goto ReadStructEndError
+	}
+
+	return offset, nil
+ReadStructBeginError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read struct begin error: ", p), err)
+ReadFieldBeginError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d begin error: ", p, fieldId), err)
+ReadFieldError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_TryReduceCouponStockResp[fieldId]), err)
+SkipFieldError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T field %d skip type %d error: ", p, fieldId, fieldTypeId), err)
+ReadFieldEndError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read field end error", p), err)
+ReadStructEndError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+}
+
+func (p *TryReduceCouponStockResp) FastReadField1(buf []byte) (int, error) {
+	offset := 0
+
+	var _field bool
+	if v, l, err := bthrift.Binary.ReadBool(buf[offset:]); err != nil {
+		return offset, err
+	} else {
+		offset += l
+
+		_field = v
+
+	}
+	p.IsSuccess = _field
+	return offset, nil
+}
+
+// for compatibility
+func (p *TryReduceCouponStockResp) FastWrite(buf []byte) int {
+	return 0
+}
+
+func (p *TryReduceCouponStockResp) FastWriteNocopy(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+	offset := 0
+	offset += bthrift.Binary.WriteStructBegin(buf[offset:], "TryReduceCouponStockResp")
+	if p != nil {
+		offset += p.fastWriteField1(buf[offset:], binaryWriter)
+	}
+	offset += bthrift.Binary.WriteFieldStop(buf[offset:])
+	offset += bthrift.Binary.WriteStructEnd(buf[offset:])
+	return offset
+}
+
+func (p *TryReduceCouponStockResp) BLength() int {
+	l := 0
+	l += bthrift.Binary.StructBeginLength("TryReduceCouponStockResp")
+	if p != nil {
+		l += p.field1Length()
+	}
+	l += bthrift.Binary.FieldStopLength()
+	l += bthrift.Binary.StructEndLength()
+	return l
+}
+
+func (p *TryReduceCouponStockResp) fastWriteField1(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+	offset := 0
+	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "isSuccess", thrift.BOOL, 1)
+	offset += bthrift.Binary.WriteBool(buf[offset:], p.IsSuccess)
+	offset += bthrift.Binary.WriteFieldEnd(buf[offset:])
+	return offset
+}
+
+func (p *TryReduceCouponStockResp) field1Length() int {
+	l := 0
+	l += bthrift.Binary.FieldBeginLength("isSuccess", thrift.BOOL, 1)
+	l += bthrift.Binary.BoolLength(p.IsSuccess)
 	l += bthrift.Binary.FieldEndLength()
 	return l
 }
@@ -3684,7 +3996,7 @@ func (p *CouponMetaServiceUpdateCouponMetaResult) field0Length() int {
 	return l
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) FastRead(buf []byte) (int, error) {
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) FastRead(buf []byte) (int, error) {
 	var err error
 	var offset int
 	var l int
@@ -3746,7 +4058,7 @@ ReadStructBeginError:
 ReadFieldBeginError:
 	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d begin error: ", p, fieldId), err)
 ReadFieldError:
-	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_CouponMetaServiceGetCouponValidMetaListArgs[fieldId]), err)
+	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_CouponMetaServiceGetCouponValidMetaInfoArgs[fieldId]), err)
 SkipFieldError:
 	return offset, thrift.PrependError(fmt.Sprintf("%T field %d skip type %d error: ", p, fieldId, fieldTypeId), err)
 ReadFieldEndError:
@@ -3755,9 +4067,9 @@ ReadStructEndError:
 	return offset, thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) FastReadField1(buf []byte) (int, error) {
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) FastReadField1(buf []byte) (int, error) {
 	offset := 0
-	_field := NewGetCouponValidMetaListReq()
+	_field := NewGetCouponValidMetaInfoReq()
 	if l, err := _field.FastRead(buf[offset:]); err != nil {
 		return offset, err
 	} else {
@@ -3768,13 +4080,13 @@ func (p *CouponMetaServiceGetCouponValidMetaListArgs) FastReadField1(buf []byte)
 }
 
 // for compatibility
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) FastWrite(buf []byte) int {
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) FastWrite(buf []byte) int {
 	return 0
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) FastWriteNocopy(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) FastWriteNocopy(buf []byte, binaryWriter bthrift.BinaryWriter) int {
 	offset := 0
-	offset += bthrift.Binary.WriteStructBegin(buf[offset:], "getCouponValidMetaList_args")
+	offset += bthrift.Binary.WriteStructBegin(buf[offset:], "getCouponValidMetaInfo_args")
 	if p != nil {
 		offset += p.fastWriteField1(buf[offset:], binaryWriter)
 	}
@@ -3783,9 +4095,9 @@ func (p *CouponMetaServiceGetCouponValidMetaListArgs) FastWriteNocopy(buf []byte
 	return offset
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) BLength() int {
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) BLength() int {
 	l := 0
-	l += bthrift.Binary.StructBeginLength("getCouponValidMetaList_args")
+	l += bthrift.Binary.StructBeginLength("getCouponValidMetaInfo_args")
 	if p != nil {
 		l += p.field1Length()
 	}
@@ -3794,7 +4106,7 @@ func (p *CouponMetaServiceGetCouponValidMetaListArgs) BLength() int {
 	return l
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) fastWriteField1(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) fastWriteField1(buf []byte, binaryWriter bthrift.BinaryWriter) int {
 	offset := 0
 	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "req", thrift.STRUCT, 1)
 	offset += p.Req.FastWriteNocopy(buf[offset:], binaryWriter)
@@ -3802,7 +4114,7 @@ func (p *CouponMetaServiceGetCouponValidMetaListArgs) fastWriteField1(buf []byte
 	return offset
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) field1Length() int {
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) field1Length() int {
 	l := 0
 	l += bthrift.Binary.FieldBeginLength("req", thrift.STRUCT, 1)
 	l += p.Req.BLength()
@@ -3810,7 +4122,7 @@ func (p *CouponMetaServiceGetCouponValidMetaListArgs) field1Length() int {
 	return l
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListResult) FastRead(buf []byte) (int, error) {
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) FastRead(buf []byte) (int, error) {
 	var err error
 	var offset int
 	var l int
@@ -3872,7 +4184,7 @@ ReadStructBeginError:
 ReadFieldBeginError:
 	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d begin error: ", p, fieldId), err)
 ReadFieldError:
-	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_CouponMetaServiceGetCouponValidMetaListResult[fieldId]), err)
+	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_CouponMetaServiceGetCouponValidMetaInfoResult[fieldId]), err)
 SkipFieldError:
 	return offset, thrift.PrependError(fmt.Sprintf("%T field %d skip type %d error: ", p, fieldId, fieldTypeId), err)
 ReadFieldEndError:
@@ -3881,9 +4193,9 @@ ReadStructEndError:
 	return offset, thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListResult) FastReadField0(buf []byte) (int, error) {
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) FastReadField0(buf []byte) (int, error) {
 	offset := 0
-	_field := NewGetCouponValidMetaListResp()
+	_field := NewGetCouponValidMetaInfoResp()
 	if l, err := _field.FastRead(buf[offset:]); err != nil {
 		return offset, err
 	} else {
@@ -3894,13 +4206,13 @@ func (p *CouponMetaServiceGetCouponValidMetaListResult) FastReadField0(buf []byt
 }
 
 // for compatibility
-func (p *CouponMetaServiceGetCouponValidMetaListResult) FastWrite(buf []byte) int {
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) FastWrite(buf []byte) int {
 	return 0
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListResult) FastWriteNocopy(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) FastWriteNocopy(buf []byte, binaryWriter bthrift.BinaryWriter) int {
 	offset := 0
-	offset += bthrift.Binary.WriteStructBegin(buf[offset:], "getCouponValidMetaList_result")
+	offset += bthrift.Binary.WriteStructBegin(buf[offset:], "getCouponValidMetaInfo_result")
 	if p != nil {
 		offset += p.fastWriteField0(buf[offset:], binaryWriter)
 	}
@@ -3909,9 +4221,9 @@ func (p *CouponMetaServiceGetCouponValidMetaListResult) FastWriteNocopy(buf []by
 	return offset
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListResult) BLength() int {
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) BLength() int {
 	l := 0
-	l += bthrift.Binary.StructBeginLength("getCouponValidMetaList_result")
+	l += bthrift.Binary.StructBeginLength("getCouponValidMetaInfo_result")
 	if p != nil {
 		l += p.field0Length()
 	}
@@ -3920,7 +4232,7 @@ func (p *CouponMetaServiceGetCouponValidMetaListResult) BLength() int {
 	return l
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListResult) fastWriteField0(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) fastWriteField0(buf []byte, binaryWriter bthrift.BinaryWriter) int {
 	offset := 0
 	if p.IsSetSuccess() {
 		offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "success", thrift.STRUCT, 0)
@@ -3930,7 +4242,263 @@ func (p *CouponMetaServiceGetCouponValidMetaListResult) fastWriteField0(buf []by
 	return offset
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListResult) field0Length() int {
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) field0Length() int {
+	l := 0
+	if p.IsSetSuccess() {
+		l += bthrift.Binary.FieldBeginLength("success", thrift.STRUCT, 0)
+		l += p.Success.BLength()
+		l += bthrift.Binary.FieldEndLength()
+	}
+	return l
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockArgs) FastRead(buf []byte) (int, error) {
+	var err error
+	var offset int
+	var l int
+	var fieldTypeId thrift.TType
+	var fieldId int16
+	_, l, err = bthrift.Binary.ReadStructBegin(buf)
+	offset += l
+	if err != nil {
+		goto ReadStructBeginError
+	}
+
+	for {
+		_, fieldTypeId, fieldId, l, err = bthrift.Binary.ReadFieldBegin(buf[offset:])
+		offset += l
+		if err != nil {
+			goto ReadFieldBeginError
+		}
+		if fieldTypeId == thrift.STOP {
+			break
+		}
+		switch fieldId {
+		case 1:
+			if fieldTypeId == thrift.STRUCT {
+				l, err = p.FastReadField1(buf[offset:])
+				offset += l
+				if err != nil {
+					goto ReadFieldError
+				}
+			} else {
+				l, err = bthrift.Binary.Skip(buf[offset:], fieldTypeId)
+				offset += l
+				if err != nil {
+					goto SkipFieldError
+				}
+			}
+		default:
+			l, err = bthrift.Binary.Skip(buf[offset:], fieldTypeId)
+			offset += l
+			if err != nil {
+				goto SkipFieldError
+			}
+		}
+
+		l, err = bthrift.Binary.ReadFieldEnd(buf[offset:])
+		offset += l
+		if err != nil {
+			goto ReadFieldEndError
+		}
+	}
+	l, err = bthrift.Binary.ReadStructEnd(buf[offset:])
+	offset += l
+	if err != nil {
+		goto ReadStructEndError
+	}
+
+	return offset, nil
+ReadStructBeginError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read struct begin error: ", p), err)
+ReadFieldBeginError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d begin error: ", p, fieldId), err)
+ReadFieldError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_CouponMetaServiceTryReduceCouponStockArgs[fieldId]), err)
+SkipFieldError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T field %d skip type %d error: ", p, fieldId, fieldTypeId), err)
+ReadFieldEndError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read field end error", p), err)
+ReadStructEndError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockArgs) FastReadField1(buf []byte) (int, error) {
+	offset := 0
+	_field := NewTryReduceCouponStockReq()
+	if l, err := _field.FastRead(buf[offset:]); err != nil {
+		return offset, err
+	} else {
+		offset += l
+	}
+	p.Req = _field
+	return offset, nil
+}
+
+// for compatibility
+func (p *CouponMetaServiceTryReduceCouponStockArgs) FastWrite(buf []byte) int {
+	return 0
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockArgs) FastWriteNocopy(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+	offset := 0
+	offset += bthrift.Binary.WriteStructBegin(buf[offset:], "TryReduceCouponStock_args")
+	if p != nil {
+		offset += p.fastWriteField1(buf[offset:], binaryWriter)
+	}
+	offset += bthrift.Binary.WriteFieldStop(buf[offset:])
+	offset += bthrift.Binary.WriteStructEnd(buf[offset:])
+	return offset
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockArgs) BLength() int {
+	l := 0
+	l += bthrift.Binary.StructBeginLength("TryReduceCouponStock_args")
+	if p != nil {
+		l += p.field1Length()
+	}
+	l += bthrift.Binary.FieldStopLength()
+	l += bthrift.Binary.StructEndLength()
+	return l
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockArgs) fastWriteField1(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+	offset := 0
+	offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "req", thrift.STRUCT, 1)
+	offset += p.Req.FastWriteNocopy(buf[offset:], binaryWriter)
+	offset += bthrift.Binary.WriteFieldEnd(buf[offset:])
+	return offset
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockArgs) field1Length() int {
+	l := 0
+	l += bthrift.Binary.FieldBeginLength("req", thrift.STRUCT, 1)
+	l += p.Req.BLength()
+	l += bthrift.Binary.FieldEndLength()
+	return l
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockResult) FastRead(buf []byte) (int, error) {
+	var err error
+	var offset int
+	var l int
+	var fieldTypeId thrift.TType
+	var fieldId int16
+	_, l, err = bthrift.Binary.ReadStructBegin(buf)
+	offset += l
+	if err != nil {
+		goto ReadStructBeginError
+	}
+
+	for {
+		_, fieldTypeId, fieldId, l, err = bthrift.Binary.ReadFieldBegin(buf[offset:])
+		offset += l
+		if err != nil {
+			goto ReadFieldBeginError
+		}
+		if fieldTypeId == thrift.STOP {
+			break
+		}
+		switch fieldId {
+		case 0:
+			if fieldTypeId == thrift.STRUCT {
+				l, err = p.FastReadField0(buf[offset:])
+				offset += l
+				if err != nil {
+					goto ReadFieldError
+				}
+			} else {
+				l, err = bthrift.Binary.Skip(buf[offset:], fieldTypeId)
+				offset += l
+				if err != nil {
+					goto SkipFieldError
+				}
+			}
+		default:
+			l, err = bthrift.Binary.Skip(buf[offset:], fieldTypeId)
+			offset += l
+			if err != nil {
+				goto SkipFieldError
+			}
+		}
+
+		l, err = bthrift.Binary.ReadFieldEnd(buf[offset:])
+		offset += l
+		if err != nil {
+			goto ReadFieldEndError
+		}
+	}
+	l, err = bthrift.Binary.ReadStructEnd(buf[offset:])
+	offset += l
+	if err != nil {
+		goto ReadStructEndError
+	}
+
+	return offset, nil
+ReadStructBeginError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read struct begin error: ", p), err)
+ReadFieldBeginError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d begin error: ", p, fieldId), err)
+ReadFieldError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_CouponMetaServiceTryReduceCouponStockResult[fieldId]), err)
+SkipFieldError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T field %d skip type %d error: ", p, fieldId, fieldTypeId), err)
+ReadFieldEndError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read field end error", p), err)
+ReadStructEndError:
+	return offset, thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockResult) FastReadField0(buf []byte) (int, error) {
+	offset := 0
+	_field := NewTryReduceCouponStockResp()
+	if l, err := _field.FastRead(buf[offset:]); err != nil {
+		return offset, err
+	} else {
+		offset += l
+	}
+	p.Success = _field
+	return offset, nil
+}
+
+// for compatibility
+func (p *CouponMetaServiceTryReduceCouponStockResult) FastWrite(buf []byte) int {
+	return 0
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockResult) FastWriteNocopy(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+	offset := 0
+	offset += bthrift.Binary.WriteStructBegin(buf[offset:], "TryReduceCouponStock_result")
+	if p != nil {
+		offset += p.fastWriteField0(buf[offset:], binaryWriter)
+	}
+	offset += bthrift.Binary.WriteFieldStop(buf[offset:])
+	offset += bthrift.Binary.WriteStructEnd(buf[offset:])
+	return offset
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockResult) BLength() int {
+	l := 0
+	l += bthrift.Binary.StructBeginLength("TryReduceCouponStock_result")
+	if p != nil {
+		l += p.field0Length()
+	}
+	l += bthrift.Binary.FieldStopLength()
+	l += bthrift.Binary.StructEndLength()
+	return l
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockResult) fastWriteField0(buf []byte, binaryWriter bthrift.BinaryWriter) int {
+	offset := 0
+	if p.IsSetSuccess() {
+		offset += bthrift.Binary.WriteFieldBegin(buf[offset:], "success", thrift.STRUCT, 0)
+		offset += p.Success.FastWriteNocopy(buf[offset:], binaryWriter)
+		offset += bthrift.Binary.WriteFieldEnd(buf[offset:])
+	}
+	return offset
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockResult) field0Length() int {
 	l := 0
 	if p.IsSetSuccess() {
 		l += bthrift.Binary.FieldBeginLength("success", thrift.STRUCT, 0)
@@ -3972,10 +4540,18 @@ func (p *CouponMetaServiceUpdateCouponMetaResult) GetResult() interface{} {
 	return p.Success
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) GetFirstArgument() interface{} {
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) GetFirstArgument() interface{} {
 	return p.Req
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListResult) GetResult() interface{} {
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) GetResult() interface{} {
+	return p.Success
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockResult) GetResult() interface{} {
 	return p.Success
 }

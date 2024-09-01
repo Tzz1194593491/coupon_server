@@ -98,14 +98,25 @@ func (p *UpdateCouponMetaResp) IsValid() error {
 	}
 	return nil
 }
-func (p *GetCouponValidMetaListReq) IsValid() error {
+func (p *GetCouponValidMetaInfoReq) IsValid() error {
 	return nil
 }
-func (p *GetCouponValidMetaListResp) IsValid() error {
+func (p *GetCouponValidMetaInfoResp) IsValid() error {
+	if p.CouponMetaInfo != nil {
+		if err := p.CouponMetaInfo.IsValid(); err != nil {
+			return fmt.Errorf("field CouponMetaInfo not valid, %w", err)
+		}
+	}
 	if p.BaseResp != nil {
 		if err := p.BaseResp.IsValid(); err != nil {
 			return fmt.Errorf("field BaseResp not valid, %w", err)
 		}
 	}
+	return nil
+}
+func (p *TryReduceCouponStockReq) IsValid() error {
+	return nil
+}
+func (p *TryReduceCouponStockResp) IsValid() error {
 	return nil
 }

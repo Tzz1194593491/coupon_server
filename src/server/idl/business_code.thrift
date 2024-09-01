@@ -11,4 +11,5 @@ enum BusinessCode {
     GET_FAIL = 506 // 获取失败
     UPDATE_FAIL = 507 // 更新失败
     PARAM_PARSE_FAIL = 508 // 参数解析失败
+    SEND_COUPON_FAIL = 509 // 发券失败
 }

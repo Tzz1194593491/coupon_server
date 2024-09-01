@@ -3002,29 +3002,29 @@ func (p *UpdateCouponMetaResp) Field255DeepEqual(src *base.BaseResp) bool {
 	return true
 }
 
-type GetCouponValidMetaListReq struct {
+type GetCouponValidMetaInfoReq struct {
 	CouponMetaNo int64 `thrift:"coupon_meta_no,1,required" frugal:"1,required,i64" json:"coupon_meta_no"`
 }
 
-func NewGetCouponValidMetaListReq() *GetCouponValidMetaListReq {
-	return &GetCouponValidMetaListReq{}
+func NewGetCouponValidMetaInfoReq() *GetCouponValidMetaInfoReq {
+	return &GetCouponValidMetaInfoReq{}
 }
 
-func (p *GetCouponValidMetaListReq) InitDefault() {
+func (p *GetCouponValidMetaInfoReq) InitDefault() {
 }
 
-func (p *GetCouponValidMetaListReq) GetCouponMetaNo() (v int64) {
+func (p *GetCouponValidMetaInfoReq) GetCouponMetaNo() (v int64) {
 	return p.CouponMetaNo
 }
-func (p *GetCouponValidMetaListReq) SetCouponMetaNo(val int64) {
+func (p *GetCouponValidMetaInfoReq) SetCouponMetaNo(val int64) {
 	p.CouponMetaNo = val
 }
 
-var fieldIDToName_GetCouponValidMetaListReq = map[int16]string{
+var fieldIDToName_GetCouponValidMetaInfoReq = map[int16]string{
 	1: "coupon_meta_no",
 }
 
-func (p *GetCouponValidMetaListReq) Read(iprot thrift.TProtocol) (err error) {
+func (p *GetCouponValidMetaInfoReq) Read(iprot thrift.TProtocol) (err error) {
 
 	var fieldTypeId thrift.TType
 	var fieldId int16
@@ -3076,7 +3076,7 @@ ReadStructBeginError:
 ReadFieldBeginError:
 	return thrift.PrependError(fmt.Sprintf("%T read field %d begin error: ", p, fieldId), err)
 ReadFieldError:
-	return thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_GetCouponValidMetaListReq[fieldId]), err)
+	return thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_GetCouponValidMetaInfoReq[fieldId]), err)
 SkipFieldError:
 	return thrift.PrependError(fmt.Sprintf("%T field %d skip type %d error: ", p, fieldId, fieldTypeId), err)
 
@@ -3085,10 +3085,10 @@ ReadFieldEndError:
 ReadStructEndError:
 	return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
 RequiredFieldNotSetError:
-	return thrift.NewTProtocolExceptionWithType(thrift.INVALID_DATA, fmt.Errorf("required field %s is not set", fieldIDToName_GetCouponValidMetaListReq[fieldId]))
+	return thrift.NewTProtocolExceptionWithType(thrift.INVALID_DATA, fmt.Errorf("required field %s is not set", fieldIDToName_GetCouponValidMetaInfoReq[fieldId]))
 }
 
-func (p *GetCouponValidMetaListReq) ReadField1(iprot thrift.TProtocol) error {
+func (p *GetCouponValidMetaInfoReq) ReadField1(iprot thrift.TProtocol) error {
 
 	var _field int64
 	if v, err := iprot.ReadI64(); err != nil {
@@ -3100,9 +3100,9 @@ func (p *GetCouponValidMetaListReq) ReadField1(iprot thrift.TProtocol) error {
 	return nil
 }
 
-func (p *GetCouponValidMetaListReq) Write(oprot thrift.TProtocol) (err error) {
+func (p *GetCouponValidMetaInfoReq) Write(oprot thrift.TProtocol) (err error) {
 	var fieldId int16
-	if err = oprot.WriteStructBegin("GetCouponValidMetaListReq"); err != nil {
+	if err = oprot.WriteStructBegin("GetCouponValidMetaInfoReq"); err != nil {
 		goto WriteStructBeginError
 	}
 	if p != nil {
@@ -3128,7 +3128,7 @@ WriteStructEndError:
 	return thrift.PrependError(fmt.Sprintf("%T write struct end error: ", p), err)
 }
 
-func (p *GetCouponValidMetaListReq) writeField1(oprot thrift.TProtocol) (err error) {
+func (p *GetCouponValidMetaInfoReq) writeField1(oprot thrift.TProtocol) (err error) {
 	if err = oprot.WriteFieldBegin("coupon_meta_no", thrift.I64, 1); err != nil {
 		goto WriteFieldBeginError
 	}
@@ -3145,15 +3145,15 @@ WriteFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 1 end error: ", p), err)
 }
 
-func (p *GetCouponValidMetaListReq) String() string {
+func (p *GetCouponValidMetaInfoReq) String() string {
 	if p == nil {
 		return "<nil>"
 	}
-	return fmt.Sprintf("GetCouponValidMetaListReq(%+v)", *p)
+	return fmt.Sprintf("GetCouponValidMetaInfoReq(%+v)", *p)
 
 }
 
-func (p *GetCouponValidMetaListReq) DeepEqual(ano *GetCouponValidMetaListReq) bool {
+func (p *GetCouponValidMetaInfoReq) DeepEqual(ano *GetCouponValidMetaInfoReq) bool {
 	if p == ano {
 		return true
 	} else if p == nil || ano == nil {
@@ -3165,7 +3165,7 @@ func (p *GetCouponValidMetaListReq) DeepEqual(ano *GetCouponValidMetaListReq) bo
 	return true
 }
 
-func (p *GetCouponValidMetaListReq) Field1DeepEqual(src int64) bool {
+func (p *GetCouponValidMetaInfoReq) Field1DeepEqual(src int64) bool {
 
 	if p.CouponMetaNo != src {
 		return false
@@ -3173,47 +3173,65 @@ func (p *GetCouponValidMetaListReq) Field1DeepEqual(src int64) bool {
 	return true
 }
 
-type GetCouponValidMetaListResp struct {
-	CouponMetaMap map[string]*CouponMeta `thrift:"coupon_meta_map,1" frugal:"1,default,map<string:CouponMeta>" json:"coupon_meta_map"`
-	BaseResp      *base.BaseResp         `thrift:"baseResp,255" frugal:"255,default,base.BaseResp" json:"baseResp"`
+type GetCouponValidMetaInfoResp struct {
+	CouponMetaMap  map[string]*CouponMeta `thrift:"coupon_meta_map,1" frugal:"1,default,map<string:CouponMeta>" json:"coupon_meta_map"`
+	CouponMetaInfo *CouponMeta            `thrift:"coupon_meta_info,2" frugal:"2,default,CouponMeta" json:"coupon_meta_info"`
+	BaseResp       *base.BaseResp         `thrift:"baseResp,255" frugal:"255,default,base.BaseResp" json:"baseResp"`
 }
 
-func NewGetCouponValidMetaListResp() *GetCouponValidMetaListResp {
-	return &GetCouponValidMetaListResp{}
+func NewGetCouponValidMetaInfoResp() *GetCouponValidMetaInfoResp {
+	return &GetCouponValidMetaInfoResp{}
 }
 
-func (p *GetCouponValidMetaListResp) InitDefault() {
+func (p *GetCouponValidMetaInfoResp) InitDefault() {
 }
 
-func (p *GetCouponValidMetaListResp) GetCouponMetaMap() (v map[string]*CouponMeta) {
+func (p *GetCouponValidMetaInfoResp) GetCouponMetaMap() (v map[string]*CouponMeta) {
 	return p.CouponMetaMap
 }
 
-var GetCouponValidMetaListResp_BaseResp_DEFAULT *base.BaseResp
+var GetCouponValidMetaInfoResp_CouponMetaInfo_DEFAULT *CouponMeta
 
-func (p *GetCouponValidMetaListResp) GetBaseResp() (v *base.BaseResp) {
+func (p *GetCouponValidMetaInfoResp) GetCouponMetaInfo() (v *CouponMeta) {
+	if !p.IsSetCouponMetaInfo() {
+		return GetCouponValidMetaInfoResp_CouponMetaInfo_DEFAULT
+	}
+	return p.CouponMetaInfo
+}
+
+var GetCouponValidMetaInfoResp_BaseResp_DEFAULT *base.BaseResp
+
+func (p *GetCouponValidMetaInfoResp) GetBaseResp() (v *base.BaseResp) {
 	if !p.IsSetBaseResp() {
-		return GetCouponValidMetaListResp_BaseResp_DEFAULT
+		return GetCouponValidMetaInfoResp_BaseResp_DEFAULT
 	}
 	return p.BaseResp
 }
-func (p *GetCouponValidMetaListResp) SetCouponMetaMap(val map[string]*CouponMeta) {
+func (p *GetCouponValidMetaInfoResp) SetCouponMetaMap(val map[string]*CouponMeta) {
 	p.CouponMetaMap = val
 }
-func (p *GetCouponValidMetaListResp) SetBaseResp(val *base.BaseResp) {
+func (p *GetCouponValidMetaInfoResp) SetCouponMetaInfo(val *CouponMeta) {
+	p.CouponMetaInfo = val
+}
+func (p *GetCouponValidMetaInfoResp) SetBaseResp(val *base.BaseResp) {
 	p.BaseResp = val
 }
 
-var fieldIDToName_GetCouponValidMetaListResp = map[int16]string{
+var fieldIDToName_GetCouponValidMetaInfoResp = map[int16]string{
 	1:   "coupon_meta_map",
+	2:   "coupon_meta_info",
 	255: "baseResp",
 }
 
-func (p *GetCouponValidMetaListResp) IsSetBaseResp() bool {
+func (p *GetCouponValidMetaInfoResp) IsSetCouponMetaInfo() bool {
+	return p.CouponMetaInfo != nil
+}
+
+func (p *GetCouponValidMetaInfoResp) IsSetBaseResp() bool {
 	return p.BaseResp != nil
 }
 
-func (p *GetCouponValidMetaListResp) Read(iprot thrift.TProtocol) (err error) {
+func (p *GetCouponValidMetaInfoResp) Read(iprot thrift.TProtocol) (err error) {
 
 	var fieldTypeId thrift.TType
 	var fieldId int16
@@ -3235,6 +3253,14 @@ func (p *GetCouponValidMetaListResp) Read(iprot thrift.TProtocol) (err error) {
 		case 1:
 			if fieldTypeId == thrift.MAP {
 				if err = p.ReadField1(iprot); err != nil {
+					goto ReadFieldError
+				}
+			} else if err = iprot.Skip(fieldTypeId); err != nil {
+				goto SkipFieldError
+			}
+		case 2:
+			if fieldTypeId == thrift.STRUCT {
+				if err = p.ReadField2(iprot); err != nil {
 					goto ReadFieldError
 				}
 			} else if err = iprot.Skip(fieldTypeId); err != nil {
@@ -3267,7 +3293,7 @@ ReadStructBeginError:
 ReadFieldBeginError:
 	return thrift.PrependError(fmt.Sprintf("%T read field %d begin error: ", p, fieldId), err)
 ReadFieldError:
-	return thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_GetCouponValidMetaListResp[fieldId]), err)
+	return thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_GetCouponValidMetaInfoResp[fieldId]), err)
 SkipFieldError:
 	return thrift.PrependError(fmt.Sprintf("%T field %d skip type %d error: ", p, fieldId, fieldTypeId), err)
 
@@ -3277,7 +3303,7 @@ ReadStructEndError:
 	return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
 }
 
-func (p *GetCouponValidMetaListResp) ReadField1(iprot thrift.TProtocol) error {
+func (p *GetCouponValidMetaInfoResp) ReadField1(iprot thrift.TProtocol) error {
 	_, _, size, err := iprot.ReadMapBegin()
 	if err != nil {
 		return err
@@ -3306,7 +3332,15 @@ func (p *GetCouponValidMetaListResp) ReadField1(iprot thrift.TProtocol) error {
 	p.CouponMetaMap = _field
 	return nil
 }
-func (p *GetCouponValidMetaListResp) ReadField255(iprot thrift.TProtocol) error {
+func (p *GetCouponValidMetaInfoResp) ReadField2(iprot thrift.TProtocol) error {
+	_field := NewCouponMeta()
+	if err := _field.Read(iprot); err != nil {
+		return err
+	}
+	p.CouponMetaInfo = _field
+	return nil
+}
+func (p *GetCouponValidMetaInfoResp) ReadField255(iprot thrift.TProtocol) error {
 	_field := base.NewBaseResp()
 	if err := _field.Read(iprot); err != nil {
 		return err
@@ -3315,14 +3349,18 @@ func (p *GetCouponValidMetaListResp) ReadField255(iprot thrift.TProtocol) error 
 	return nil
 }
 
-func (p *GetCouponValidMetaListResp) Write(oprot thrift.TProtocol) (err error) {
+func (p *GetCouponValidMetaInfoResp) Write(oprot thrift.TProtocol) (err error) {
 	var fieldId int16
-	if err = oprot.WriteStructBegin("GetCouponValidMetaListResp"); err != nil {
+	if err = oprot.WriteStructBegin("GetCouponValidMetaInfoResp"); err != nil {
 		goto WriteStructBeginError
 	}
 	if p != nil {
 		if err = p.writeField1(oprot); err != nil {
 			fieldId = 1
+			goto WriteFieldError
+		}
+		if err = p.writeField2(oprot); err != nil {
+			fieldId = 2
 			goto WriteFieldError
 		}
 		if err = p.writeField255(oprot); err != nil {
@@ -3347,7 +3385,7 @@ WriteStructEndError:
 	return thrift.PrependError(fmt.Sprintf("%T write struct end error: ", p), err)
 }
 
-func (p *GetCouponValidMetaListResp) writeField1(oprot thrift.TProtocol) (err error) {
+func (p *GetCouponValidMetaInfoResp) writeField1(oprot thrift.TProtocol) (err error) {
 	if err = oprot.WriteFieldBegin("coupon_meta_map", thrift.MAP, 1); err != nil {
 		goto WriteFieldBeginError
 	}
@@ -3375,7 +3413,24 @@ WriteFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 1 end error: ", p), err)
 }
 
-func (p *GetCouponValidMetaListResp) writeField255(oprot thrift.TProtocol) (err error) {
+func (p *GetCouponValidMetaInfoResp) writeField2(oprot thrift.TProtocol) (err error) {
+	if err = oprot.WriteFieldBegin("coupon_meta_info", thrift.STRUCT, 2); err != nil {
+		goto WriteFieldBeginError
+	}
+	if err := p.CouponMetaInfo.Write(oprot); err != nil {
+		return err
+	}
+	if err = oprot.WriteFieldEnd(); err != nil {
+		goto WriteFieldEndError
+	}
+	return nil
+WriteFieldBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 2 begin error: ", p), err)
+WriteFieldEndError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 2 end error: ", p), err)
+}
+
+func (p *GetCouponValidMetaInfoResp) writeField255(oprot thrift.TProtocol) (err error) {
 	if err = oprot.WriteFieldBegin("baseResp", thrift.STRUCT, 255); err != nil {
 		goto WriteFieldBeginError
 	}
@@ -3392,15 +3447,15 @@ WriteFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 255 end error: ", p), err)
 }
 
-func (p *GetCouponValidMetaListResp) String() string {
+func (p *GetCouponValidMetaInfoResp) String() string {
 	if p == nil {
 		return "<nil>"
 	}
-	return fmt.Sprintf("GetCouponValidMetaListResp(%+v)", *p)
+	return fmt.Sprintf("GetCouponValidMetaInfoResp(%+v)", *p)
 
 }
 
-func (p *GetCouponValidMetaListResp) DeepEqual(ano *GetCouponValidMetaListResp) bool {
+func (p *GetCouponValidMetaInfoResp) DeepEqual(ano *GetCouponValidMetaInfoResp) bool {
 	if p == ano {
 		return true
 	} else if p == nil || ano == nil {
@@ -3409,13 +3464,16 @@ func (p *GetCouponValidMetaListResp) DeepEqual(ano *GetCouponValidMetaListResp) 
 	if !p.Field1DeepEqual(ano.CouponMetaMap) {
 		return false
 	}
+	if !p.Field2DeepEqual(ano.CouponMetaInfo) {
+		return false
+	}
 	if !p.Field255DeepEqual(ano.BaseResp) {
 		return false
 	}
 	return true
 }
 
-func (p *GetCouponValidMetaListResp) Field1DeepEqual(src map[string]*CouponMeta) bool {
+func (p *GetCouponValidMetaInfoResp) Field1DeepEqual(src map[string]*CouponMeta) bool {
 
 	if len(p.CouponMetaMap) != len(src) {
 		return false
@@ -3428,9 +3486,350 @@ func (p *GetCouponValidMetaListResp) Field1DeepEqual(src map[string]*CouponMeta)
 	}
 	return true
 }
-func (p *GetCouponValidMetaListResp) Field255DeepEqual(src *base.BaseResp) bool {
+func (p *GetCouponValidMetaInfoResp) Field2DeepEqual(src *CouponMeta) bool {
+
+	if !p.CouponMetaInfo.DeepEqual(src) {
+		return false
+	}
+	return true
+}
+func (p *GetCouponValidMetaInfoResp) Field255DeepEqual(src *base.BaseResp) bool {
 
 	if !p.BaseResp.DeepEqual(src) {
+		return false
+	}
+	return true
+}
+
+type TryReduceCouponStockReq struct {
+	CouponMetaNo int64 `thrift:"coupon_meta_no,1,required" frugal:"1,required,i64" json:"coupon_meta_no"`
+}
+
+func NewTryReduceCouponStockReq() *TryReduceCouponStockReq {
+	return &TryReduceCouponStockReq{}
+}
+
+func (p *TryReduceCouponStockReq) InitDefault() {
+}
+
+func (p *TryReduceCouponStockReq) GetCouponMetaNo() (v int64) {
+	return p.CouponMetaNo
+}
+func (p *TryReduceCouponStockReq) SetCouponMetaNo(val int64) {
+	p.CouponMetaNo = val
+}
+
+var fieldIDToName_TryReduceCouponStockReq = map[int16]string{
+	1: "coupon_meta_no",
+}
+
+func (p *TryReduceCouponStockReq) Read(iprot thrift.TProtocol) (err error) {
+
+	var fieldTypeId thrift.TType
+	var fieldId int16
+	var issetCouponMetaNo bool = false
+
+	if _, err = iprot.ReadStructBegin(); err != nil {
+		goto ReadStructBeginError
+	}
+
+	for {
+		_, fieldTypeId, fieldId, err = iprot.ReadFieldBegin()
+		if err != nil {
+			goto ReadFieldBeginError
+		}
+		if fieldTypeId == thrift.STOP {
+			break
+		}
+
+		switch fieldId {
+		case 1:
+			if fieldTypeId == thrift.I64 {
+				if err = p.ReadField1(iprot); err != nil {
+					goto ReadFieldError
+				}
+				issetCouponMetaNo = true
+			} else if err = iprot.Skip(fieldTypeId); err != nil {
+				goto SkipFieldError
+			}
+		default:
+			if err = iprot.Skip(fieldTypeId); err != nil {
+				goto SkipFieldError
+			}
+		}
+		if err = iprot.ReadFieldEnd(); err != nil {
+			goto ReadFieldEndError
+		}
+	}
+	if err = iprot.ReadStructEnd(); err != nil {
+		goto ReadStructEndError
+	}
+
+	if !issetCouponMetaNo {
+		fieldId = 1
+		goto RequiredFieldNotSetError
+	}
+	return nil
+ReadStructBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T read struct begin error: ", p), err)
+ReadFieldBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T read field %d begin error: ", p, fieldId), err)
+ReadFieldError:
+	return thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_TryReduceCouponStockReq[fieldId]), err)
+SkipFieldError:
+	return thrift.PrependError(fmt.Sprintf("%T field %d skip type %d error: ", p, fieldId, fieldTypeId), err)
+
+ReadFieldEndError:
+	return thrift.PrependError(fmt.Sprintf("%T read field end error", p), err)
+ReadStructEndError:
+	return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+RequiredFieldNotSetError:
+	return thrift.NewTProtocolExceptionWithType(thrift.INVALID_DATA, fmt.Errorf("required field %s is not set", fieldIDToName_TryReduceCouponStockReq[fieldId]))
+}
+
+func (p *TryReduceCouponStockReq) ReadField1(iprot thrift.TProtocol) error {
+
+	var _field int64
+	if v, err := iprot.ReadI64(); err != nil {
+		return err
+	} else {
+		_field = v
+	}
+	p.CouponMetaNo = _field
+	return nil
+}
+
+func (p *TryReduceCouponStockReq) Write(oprot thrift.TProtocol) (err error) {
+	var fieldId int16
+	if err = oprot.WriteStructBegin("TryReduceCouponStockReq"); err != nil {
+		goto WriteStructBeginError
+	}
+	if p != nil {
+		if err = p.writeField1(oprot); err != nil {
+			fieldId = 1
+			goto WriteFieldError
+		}
+	}
+	if err = oprot.WriteFieldStop(); err != nil {
+		goto WriteFieldStopError
+	}
+	if err = oprot.WriteStructEnd(); err != nil {
+		goto WriteStructEndError
+	}
+	return nil
+WriteStructBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
+WriteFieldError:
+	return thrift.PrependError(fmt.Sprintf("%T write field %d error: ", p, fieldId), err)
+WriteFieldStopError:
+	return thrift.PrependError(fmt.Sprintf("%T write field stop error: ", p), err)
+WriteStructEndError:
+	return thrift.PrependError(fmt.Sprintf("%T write struct end error: ", p), err)
+}
+
+func (p *TryReduceCouponStockReq) writeField1(oprot thrift.TProtocol) (err error) {
+	if err = oprot.WriteFieldBegin("coupon_meta_no", thrift.I64, 1); err != nil {
+		goto WriteFieldBeginError
+	}
+	if err := oprot.WriteI64(p.CouponMetaNo); err != nil {
+		return err
+	}
+	if err = oprot.WriteFieldEnd(); err != nil {
+		goto WriteFieldEndError
+	}
+	return nil
+WriteFieldBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 1 begin error: ", p), err)
+WriteFieldEndError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 1 end error: ", p), err)
+}
+
+func (p *TryReduceCouponStockReq) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TryReduceCouponStockReq(%+v)", *p)
+
+}
+
+func (p *TryReduceCouponStockReq) DeepEqual(ano *TryReduceCouponStockReq) bool {
+	if p == ano {
+		return true
+	} else if p == nil || ano == nil {
+		return false
+	}
+	if !p.Field1DeepEqual(ano.CouponMetaNo) {
+		return false
+	}
+	return true
+}
+
+func (p *TryReduceCouponStockReq) Field1DeepEqual(src int64) bool {
+
+	if p.CouponMetaNo != src {
+		return false
+	}
+	return true
+}
+
+type TryReduceCouponStockResp struct {
+	IsSuccess bool `thrift:"isSuccess,1" frugal:"1,default,bool" json:"isSuccess"`
+}
+
+func NewTryReduceCouponStockResp() *TryReduceCouponStockResp {
+	return &TryReduceCouponStockResp{}
+}
+
+func (p *TryReduceCouponStockResp) InitDefault() {
+}
+
+func (p *TryReduceCouponStockResp) GetIsSuccess() (v bool) {
+	return p.IsSuccess
+}
+func (p *TryReduceCouponStockResp) SetIsSuccess(val bool) {
+	p.IsSuccess = val
+}
+
+var fieldIDToName_TryReduceCouponStockResp = map[int16]string{
+	1: "isSuccess",
+}
+
+func (p *TryReduceCouponStockResp) Read(iprot thrift.TProtocol) (err error) {
+
+	var fieldTypeId thrift.TType
+	var fieldId int16
+
+	if _, err = iprot.ReadStructBegin(); err != nil {
+		goto ReadStructBeginError
+	}
+
+	for {
+		_, fieldTypeId, fieldId, err = iprot.ReadFieldBegin()
+		if err != nil {
+			goto ReadFieldBeginError
+		}
+		if fieldTypeId == thrift.STOP {
+			break
+		}
+
+		switch fieldId {
+		case 1:
+			if fieldTypeId == thrift.BOOL {
+				if err = p.ReadField1(iprot); err != nil {
+					goto ReadFieldError
+				}
+			} else if err = iprot.Skip(fieldTypeId); err != nil {
+				goto SkipFieldError
+			}
+		default:
+			if err = iprot.Skip(fieldTypeId); err != nil {
+				goto SkipFieldError
+			}
+		}
+		if err = iprot.ReadFieldEnd(); err != nil {
+			goto ReadFieldEndError
+		}
+	}
+	if err = iprot.ReadStructEnd(); err != nil {
+		goto ReadStructEndError
+	}
+
+	return nil
+ReadStructBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T read struct begin error: ", p), err)
+ReadFieldBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T read field %d begin error: ", p, fieldId), err)
+ReadFieldError:
+	return thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_TryReduceCouponStockResp[fieldId]), err)
+SkipFieldError:
+	return thrift.PrependError(fmt.Sprintf("%T field %d skip type %d error: ", p, fieldId, fieldTypeId), err)
+
+ReadFieldEndError:
+	return thrift.PrependError(fmt.Sprintf("%T read field end error", p), err)
+ReadStructEndError:
+	return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+}
+
+func (p *TryReduceCouponStockResp) ReadField1(iprot thrift.TProtocol) error {
+
+	var _field bool
+	if v, err := iprot.ReadBool(); err != nil {
+		return err
+	} else {
+		_field = v
+	}
+	p.IsSuccess = _field
+	return nil
+}
+
+func (p *TryReduceCouponStockResp) Write(oprot thrift.TProtocol) (err error) {
+	var fieldId int16
+	if err = oprot.WriteStructBegin("TryReduceCouponStockResp"); err != nil {
+		goto WriteStructBeginError
+	}
+	if p != nil {
+		if err = p.writeField1(oprot); err != nil {
+			fieldId = 1
+			goto WriteFieldError
+		}
+	}
+	if err = oprot.WriteFieldStop(); err != nil {
+		goto WriteFieldStopError
+	}
+	if err = oprot.WriteStructEnd(); err != nil {
+		goto WriteStructEndError
+	}
+	return nil
+WriteStructBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
+WriteFieldError:
+	return thrift.PrependError(fmt.Sprintf("%T write field %d error: ", p, fieldId), err)
+WriteFieldStopError:
+	return thrift.PrependError(fmt.Sprintf("%T write field stop error: ", p), err)
+WriteStructEndError:
+	return thrift.PrependError(fmt.Sprintf("%T write struct end error: ", p), err)
+}
+
+func (p *TryReduceCouponStockResp) writeField1(oprot thrift.TProtocol) (err error) {
+	if err = oprot.WriteFieldBegin("isSuccess", thrift.BOOL, 1); err != nil {
+		goto WriteFieldBeginError
+	}
+	if err := oprot.WriteBool(p.IsSuccess); err != nil {
+		return err
+	}
+	if err = oprot.WriteFieldEnd(); err != nil {
+		goto WriteFieldEndError
+	}
+	return nil
+WriteFieldBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 1 begin error: ", p), err)
+WriteFieldEndError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 1 end error: ", p), err)
+}
+
+func (p *TryReduceCouponStockResp) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("TryReduceCouponStockResp(%+v)", *p)
+
+}
+
+func (p *TryReduceCouponStockResp) DeepEqual(ano *TryReduceCouponStockResp) bool {
+	if p == ano {
+		return true
+	} else if p == nil || ano == nil {
+		return false
+	}
+	if !p.Field1DeepEqual(ano.IsSuccess) {
+		return false
+	}
+	return true
+}
+
+func (p *TryReduceCouponStockResp) Field1DeepEqual(src bool) bool {
+
+	if p.IsSuccess != src {
 		return false
 	}
 	return true
@@ -3445,7 +3844,9 @@ type CouponMetaService interface {
 
 	UpdateCouponMeta(ctx context.Context, req *UpdateCouponMetaReq) (r *UpdateCouponMetaResp, err error)
 
-	GetCouponValidMetaList(ctx context.Context, req *GetCouponValidMetaListReq) (r *GetCouponValidMetaListResp, err error)
+	GetCouponValidMetaInfo(ctx context.Context, req *GetCouponValidMetaInfoReq) (r *GetCouponValidMetaInfoResp, err error)
+
+	TryReduceCouponStock(ctx context.Context, req *TryReduceCouponStockReq) (r *TryReduceCouponStockResp, err error)
 }
 
 type CouponMetaServiceGetCouponMetaArgs struct {
@@ -4808,38 +5209,38 @@ func (p *CouponMetaServiceUpdateCouponMetaResult) Field0DeepEqual(src *UpdateCou
 	return true
 }
 
-type CouponMetaServiceGetCouponValidMetaListArgs struct {
-	Req *GetCouponValidMetaListReq `thrift:"req,1" frugal:"1,default,GetCouponValidMetaListReq" json:"req"`
+type CouponMetaServiceGetCouponValidMetaInfoArgs struct {
+	Req *GetCouponValidMetaInfoReq `thrift:"req,1" frugal:"1,default,GetCouponValidMetaInfoReq" json:"req"`
 }
 
-func NewCouponMetaServiceGetCouponValidMetaListArgs() *CouponMetaServiceGetCouponValidMetaListArgs {
-	return &CouponMetaServiceGetCouponValidMetaListArgs{}
+func NewCouponMetaServiceGetCouponValidMetaInfoArgs() *CouponMetaServiceGetCouponValidMetaInfoArgs {
+	return &CouponMetaServiceGetCouponValidMetaInfoArgs{}
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) InitDefault() {
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) InitDefault() {
 }
 
-var CouponMetaServiceGetCouponValidMetaListArgs_Req_DEFAULT *GetCouponValidMetaListReq
+var CouponMetaServiceGetCouponValidMetaInfoArgs_Req_DEFAULT *GetCouponValidMetaInfoReq
 
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) GetReq() (v *GetCouponValidMetaListReq) {
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) GetReq() (v *GetCouponValidMetaInfoReq) {
 	if !p.IsSetReq() {
-		return CouponMetaServiceGetCouponValidMetaListArgs_Req_DEFAULT
+		return CouponMetaServiceGetCouponValidMetaInfoArgs_Req_DEFAULT
 	}
 	return p.Req
 }
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) SetReq(val *GetCouponValidMetaListReq) {
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) SetReq(val *GetCouponValidMetaInfoReq) {
 	p.Req = val
 }
 
-var fieldIDToName_CouponMetaServiceGetCouponValidMetaListArgs = map[int16]string{
+var fieldIDToName_CouponMetaServiceGetCouponValidMetaInfoArgs = map[int16]string{
 	1: "req",
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) IsSetReq() bool {
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) IsSetReq() bool {
 	return p.Req != nil
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) Read(iprot thrift.TProtocol) (err error) {
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) Read(iprot thrift.TProtocol) (err error) {
 
 	var fieldTypeId thrift.TType
 	var fieldId int16
@@ -4885,7 +5286,7 @@ ReadStructBeginError:
 ReadFieldBeginError:
 	return thrift.PrependError(fmt.Sprintf("%T read field %d begin error: ", p, fieldId), err)
 ReadFieldError:
-	return thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_CouponMetaServiceGetCouponValidMetaListArgs[fieldId]), err)
+	return thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_CouponMetaServiceGetCouponValidMetaInfoArgs[fieldId]), err)
 SkipFieldError:
 	return thrift.PrependError(fmt.Sprintf("%T field %d skip type %d error: ", p, fieldId, fieldTypeId), err)
 
@@ -4895,8 +5296,8 @@ ReadStructEndError:
 	return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) ReadField1(iprot thrift.TProtocol) error {
-	_field := NewGetCouponValidMetaListReq()
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) ReadField1(iprot thrift.TProtocol) error {
+	_field := NewGetCouponValidMetaInfoReq()
 	if err := _field.Read(iprot); err != nil {
 		return err
 	}
@@ -4904,9 +5305,9 @@ func (p *CouponMetaServiceGetCouponValidMetaListArgs) ReadField1(iprot thrift.TP
 	return nil
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) Write(oprot thrift.TProtocol) (err error) {
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) Write(oprot thrift.TProtocol) (err error) {
 	var fieldId int16
-	if err = oprot.WriteStructBegin("getCouponValidMetaList_args"); err != nil {
+	if err = oprot.WriteStructBegin("getCouponValidMetaInfo_args"); err != nil {
 		goto WriteStructBeginError
 	}
 	if p != nil {
@@ -4932,7 +5333,7 @@ WriteStructEndError:
 	return thrift.PrependError(fmt.Sprintf("%T write struct end error: ", p), err)
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) writeField1(oprot thrift.TProtocol) (err error) {
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) writeField1(oprot thrift.TProtocol) (err error) {
 	if err = oprot.WriteFieldBegin("req", thrift.STRUCT, 1); err != nil {
 		goto WriteFieldBeginError
 	}
@@ -4949,15 +5350,15 @@ WriteFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 1 end error: ", p), err)
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) String() string {
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) String() string {
 	if p == nil {
 		return "<nil>"
 	}
-	return fmt.Sprintf("CouponMetaServiceGetCouponValidMetaListArgs(%+v)", *p)
+	return fmt.Sprintf("CouponMetaServiceGetCouponValidMetaInfoArgs(%+v)", *p)
 
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) DeepEqual(ano *CouponMetaServiceGetCouponValidMetaListArgs) bool {
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) DeepEqual(ano *CouponMetaServiceGetCouponValidMetaInfoArgs) bool {
 	if p == ano {
 		return true
 	} else if p == nil || ano == nil {
@@ -4969,7 +5370,7 @@ func (p *CouponMetaServiceGetCouponValidMetaListArgs) DeepEqual(ano *CouponMetaS
 	return true
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListArgs) Field1DeepEqual(src *GetCouponValidMetaListReq) bool {
+func (p *CouponMetaServiceGetCouponValidMetaInfoArgs) Field1DeepEqual(src *GetCouponValidMetaInfoReq) bool {
 
 	if !p.Req.DeepEqual(src) {
 		return false
@@ -4977,38 +5378,38 @@ func (p *CouponMetaServiceGetCouponValidMetaListArgs) Field1DeepEqual(src *GetCo
 	return true
 }
 
-type CouponMetaServiceGetCouponValidMetaListResult struct {
-	Success *GetCouponValidMetaListResp `thrift:"success,0,optional" frugal:"0,optional,GetCouponValidMetaListResp" json:"success,omitempty"`
+type CouponMetaServiceGetCouponValidMetaInfoResult struct {
+	Success *GetCouponValidMetaInfoResp `thrift:"success,0,optional" frugal:"0,optional,GetCouponValidMetaInfoResp" json:"success,omitempty"`
 }
 
-func NewCouponMetaServiceGetCouponValidMetaListResult() *CouponMetaServiceGetCouponValidMetaListResult {
-	return &CouponMetaServiceGetCouponValidMetaListResult{}
+func NewCouponMetaServiceGetCouponValidMetaInfoResult() *CouponMetaServiceGetCouponValidMetaInfoResult {
+	return &CouponMetaServiceGetCouponValidMetaInfoResult{}
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListResult) InitDefault() {
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) InitDefault() {
 }
 
-var CouponMetaServiceGetCouponValidMetaListResult_Success_DEFAULT *GetCouponValidMetaListResp
+var CouponMetaServiceGetCouponValidMetaInfoResult_Success_DEFAULT *GetCouponValidMetaInfoResp
 
-func (p *CouponMetaServiceGetCouponValidMetaListResult) GetSuccess() (v *GetCouponValidMetaListResp) {
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) GetSuccess() (v *GetCouponValidMetaInfoResp) {
 	if !p.IsSetSuccess() {
-		return CouponMetaServiceGetCouponValidMetaListResult_Success_DEFAULT
+		return CouponMetaServiceGetCouponValidMetaInfoResult_Success_DEFAULT
 	}
 	return p.Success
 }
-func (p *CouponMetaServiceGetCouponValidMetaListResult) SetSuccess(x interface{}) {
-	p.Success = x.(*GetCouponValidMetaListResp)
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) SetSuccess(x interface{}) {
+	p.Success = x.(*GetCouponValidMetaInfoResp)
 }
 
-var fieldIDToName_CouponMetaServiceGetCouponValidMetaListResult = map[int16]string{
+var fieldIDToName_CouponMetaServiceGetCouponValidMetaInfoResult = map[int16]string{
 	0: "success",
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListResult) IsSetSuccess() bool {
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) IsSetSuccess() bool {
 	return p.Success != nil
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListResult) Read(iprot thrift.TProtocol) (err error) {
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) Read(iprot thrift.TProtocol) (err error) {
 
 	var fieldTypeId thrift.TType
 	var fieldId int16
@@ -5054,7 +5455,7 @@ ReadStructBeginError:
 ReadFieldBeginError:
 	return thrift.PrependError(fmt.Sprintf("%T read field %d begin error: ", p, fieldId), err)
 ReadFieldError:
-	return thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_CouponMetaServiceGetCouponValidMetaListResult[fieldId]), err)
+	return thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_CouponMetaServiceGetCouponValidMetaInfoResult[fieldId]), err)
 SkipFieldError:
 	return thrift.PrependError(fmt.Sprintf("%T field %d skip type %d error: ", p, fieldId, fieldTypeId), err)
 
@@ -5064,8 +5465,8 @@ ReadStructEndError:
 	return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListResult) ReadField0(iprot thrift.TProtocol) error {
-	_field := NewGetCouponValidMetaListResp()
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) ReadField0(iprot thrift.TProtocol) error {
+	_field := NewGetCouponValidMetaInfoResp()
 	if err := _field.Read(iprot); err != nil {
 		return err
 	}
@@ -5073,9 +5474,9 @@ func (p *CouponMetaServiceGetCouponValidMetaListResult) ReadField0(iprot thrift.
 	return nil
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListResult) Write(oprot thrift.TProtocol) (err error) {
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) Write(oprot thrift.TProtocol) (err error) {
 	var fieldId int16
-	if err = oprot.WriteStructBegin("getCouponValidMetaList_result"); err != nil {
+	if err = oprot.WriteStructBegin("getCouponValidMetaInfo_result"); err != nil {
 		goto WriteStructBeginError
 	}
 	if p != nil {
@@ -5101,7 +5502,7 @@ WriteStructEndError:
 	return thrift.PrependError(fmt.Sprintf("%T write struct end error: ", p), err)
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListResult) writeField0(oprot thrift.TProtocol) (err error) {
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) writeField0(oprot thrift.TProtocol) (err error) {
 	if p.IsSetSuccess() {
 		if err = oprot.WriteFieldBegin("success", thrift.STRUCT, 0); err != nil {
 			goto WriteFieldBeginError
@@ -5120,15 +5521,15 @@ WriteFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 0 end error: ", p), err)
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListResult) String() string {
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) String() string {
 	if p == nil {
 		return "<nil>"
 	}
-	return fmt.Sprintf("CouponMetaServiceGetCouponValidMetaListResult(%+v)", *p)
+	return fmt.Sprintf("CouponMetaServiceGetCouponValidMetaInfoResult(%+v)", *p)
 
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListResult) DeepEqual(ano *CouponMetaServiceGetCouponValidMetaListResult) bool {
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) DeepEqual(ano *CouponMetaServiceGetCouponValidMetaInfoResult) bool {
 	if p == ano {
 		return true
 	} else if p == nil || ano == nil {
@@ -5140,7 +5541,347 @@ func (p *CouponMetaServiceGetCouponValidMetaListResult) DeepEqual(ano *CouponMet
 	return true
 }
 
-func (p *CouponMetaServiceGetCouponValidMetaListResult) Field0DeepEqual(src *GetCouponValidMetaListResp) bool {
+func (p *CouponMetaServiceGetCouponValidMetaInfoResult) Field0DeepEqual(src *GetCouponValidMetaInfoResp) bool {
+
+	if !p.Success.DeepEqual(src) {
+		return false
+	}
+	return true
+}
+
+type CouponMetaServiceTryReduceCouponStockArgs struct {
+	Req *TryReduceCouponStockReq `thrift:"req,1" frugal:"1,default,TryReduceCouponStockReq" json:"req"`
+}
+
+func NewCouponMetaServiceTryReduceCouponStockArgs() *CouponMetaServiceTryReduceCouponStockArgs {
+	return &CouponMetaServiceTryReduceCouponStockArgs{}
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockArgs) InitDefault() {
+}
+
+var CouponMetaServiceTryReduceCouponStockArgs_Req_DEFAULT *TryReduceCouponStockReq
+
+func (p *CouponMetaServiceTryReduceCouponStockArgs) GetReq() (v *TryReduceCouponStockReq) {
+	if !p.IsSetReq() {
+		return CouponMetaServiceTryReduceCouponStockArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+func (p *CouponMetaServiceTryReduceCouponStockArgs) SetReq(val *TryReduceCouponStockReq) {
+	p.Req = val
+}
+
+var fieldIDToName_CouponMetaServiceTryReduceCouponStockArgs = map[int16]string{
+	1: "req",
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockArgs) Read(iprot thrift.TProtocol) (err error) {
+
+	var fieldTypeId thrift.TType
+	var fieldId int16
+
+	if _, err = iprot.ReadStructBegin(); err != nil {
+		goto ReadStructBeginError
+	}
+
+	for {
+		_, fieldTypeId, fieldId, err = iprot.ReadFieldBegin()
+		if err != nil {
+			goto ReadFieldBeginError
+		}
+		if fieldTypeId == thrift.STOP {
+			break
+		}
+
+		switch fieldId {
+		case 1:
+			if fieldTypeId == thrift.STRUCT {
+				if err = p.ReadField1(iprot); err != nil {
+					goto ReadFieldError
+				}
+			} else if err = iprot.Skip(fieldTypeId); err != nil {
+				goto SkipFieldError
+			}
+		default:
+			if err = iprot.Skip(fieldTypeId); err != nil {
+				goto SkipFieldError
+			}
+		}
+		if err = iprot.ReadFieldEnd(); err != nil {
+			goto ReadFieldEndError
+		}
+	}
+	if err = iprot.ReadStructEnd(); err != nil {
+		goto ReadStructEndError
+	}
+
+	return nil
+ReadStructBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T read struct begin error: ", p), err)
+ReadFieldBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T read field %d begin error: ", p, fieldId), err)
+ReadFieldError:
+	return thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_CouponMetaServiceTryReduceCouponStockArgs[fieldId]), err)
+SkipFieldError:
+	return thrift.PrependError(fmt.Sprintf("%T field %d skip type %d error: ", p, fieldId, fieldTypeId), err)
+
+ReadFieldEndError:
+	return thrift.PrependError(fmt.Sprintf("%T read field end error", p), err)
+ReadStructEndError:
+	return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockArgs) ReadField1(iprot thrift.TProtocol) error {
+	_field := NewTryReduceCouponStockReq()
+	if err := _field.Read(iprot); err != nil {
+		return err
+	}
+	p.Req = _field
+	return nil
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockArgs) Write(oprot thrift.TProtocol) (err error) {
+	var fieldId int16
+	if err = oprot.WriteStructBegin("TryReduceCouponStock_args"); err != nil {
+		goto WriteStructBeginError
+	}
+	if p != nil {
+		if err = p.writeField1(oprot); err != nil {
+			fieldId = 1
+			goto WriteFieldError
+		}
+	}
+	if err = oprot.WriteFieldStop(); err != nil {
+		goto WriteFieldStopError
+	}
+	if err = oprot.WriteStructEnd(); err != nil {
+		goto WriteStructEndError
+	}
+	return nil
+WriteStructBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
+WriteFieldError:
+	return thrift.PrependError(fmt.Sprintf("%T write field %d error: ", p, fieldId), err)
+WriteFieldStopError:
+	return thrift.PrependError(fmt.Sprintf("%T write field stop error: ", p), err)
+WriteStructEndError:
+	return thrift.PrependError(fmt.Sprintf("%T write struct end error: ", p), err)
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockArgs) writeField1(oprot thrift.TProtocol) (err error) {
+	if err = oprot.WriteFieldBegin("req", thrift.STRUCT, 1); err != nil {
+		goto WriteFieldBeginError
+	}
+	if err := p.Req.Write(oprot); err != nil {
+		return err
+	}
+	if err = oprot.WriteFieldEnd(); err != nil {
+		goto WriteFieldEndError
+	}
+	return nil
+WriteFieldBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 1 begin error: ", p), err)
+WriteFieldEndError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 1 end error: ", p), err)
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockArgs) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("CouponMetaServiceTryReduceCouponStockArgs(%+v)", *p)
+
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockArgs) DeepEqual(ano *CouponMetaServiceTryReduceCouponStockArgs) bool {
+	if p == ano {
+		return true
+	} else if p == nil || ano == nil {
+		return false
+	}
+	if !p.Field1DeepEqual(ano.Req) {
+		return false
+	}
+	return true
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockArgs) Field1DeepEqual(src *TryReduceCouponStockReq) bool {
+
+	if !p.Req.DeepEqual(src) {
+		return false
+	}
+	return true
+}
+
+type CouponMetaServiceTryReduceCouponStockResult struct {
+	Success *TryReduceCouponStockResp `thrift:"success,0,optional" frugal:"0,optional,TryReduceCouponStockResp" json:"success,omitempty"`
+}
+
+func NewCouponMetaServiceTryReduceCouponStockResult() *CouponMetaServiceTryReduceCouponStockResult {
+	return &CouponMetaServiceTryReduceCouponStockResult{}
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockResult) InitDefault() {
+}
+
+var CouponMetaServiceTryReduceCouponStockResult_Success_DEFAULT *TryReduceCouponStockResp
+
+func (p *CouponMetaServiceTryReduceCouponStockResult) GetSuccess() (v *TryReduceCouponStockResp) {
+	if !p.IsSetSuccess() {
+		return CouponMetaServiceTryReduceCouponStockResult_Success_DEFAULT
+	}
+	return p.Success
+}
+func (p *CouponMetaServiceTryReduceCouponStockResult) SetSuccess(x interface{}) {
+	p.Success = x.(*TryReduceCouponStockResp)
+}
+
+var fieldIDToName_CouponMetaServiceTryReduceCouponStockResult = map[int16]string{
+	0: "success",
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockResult) Read(iprot thrift.TProtocol) (err error) {
+
+	var fieldTypeId thrift.TType
+	var fieldId int16
+
+	if _, err = iprot.ReadStructBegin(); err != nil {
+		goto ReadStructBeginError
+	}
+
+	for {
+		_, fieldTypeId, fieldId, err = iprot.ReadFieldBegin()
+		if err != nil {
+			goto ReadFieldBeginError
+		}
+		if fieldTypeId == thrift.STOP {
+			break
+		}
+
+		switch fieldId {
+		case 0:
+			if fieldTypeId == thrift.STRUCT {
+				if err = p.ReadField0(iprot); err != nil {
+					goto ReadFieldError
+				}
+			} else if err = iprot.Skip(fieldTypeId); err != nil {
+				goto SkipFieldError
+			}
+		default:
+			if err = iprot.Skip(fieldTypeId); err != nil {
+				goto SkipFieldError
+			}
+		}
+		if err = iprot.ReadFieldEnd(); err != nil {
+			goto ReadFieldEndError
+		}
+	}
+	if err = iprot.ReadStructEnd(); err != nil {
+		goto ReadStructEndError
+	}
+
+	return nil
+ReadStructBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T read struct begin error: ", p), err)
+ReadFieldBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T read field %d begin error: ", p, fieldId), err)
+ReadFieldError:
+	return thrift.PrependError(fmt.Sprintf("%T read field %d '%s' error: ", p, fieldId, fieldIDToName_CouponMetaServiceTryReduceCouponStockResult[fieldId]), err)
+SkipFieldError:
+	return thrift.PrependError(fmt.Sprintf("%T field %d skip type %d error: ", p, fieldId, fieldTypeId), err)
+
+ReadFieldEndError:
+	return thrift.PrependError(fmt.Sprintf("%T read field end error", p), err)
+ReadStructEndError:
+	return thrift.PrependError(fmt.Sprintf("%T read struct end error: ", p), err)
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockResult) ReadField0(iprot thrift.TProtocol) error {
+	_field := NewTryReduceCouponStockResp()
+	if err := _field.Read(iprot); err != nil {
+		return err
+	}
+	p.Success = _field
+	return nil
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockResult) Write(oprot thrift.TProtocol) (err error) {
+	var fieldId int16
+	if err = oprot.WriteStructBegin("TryReduceCouponStock_result"); err != nil {
+		goto WriteStructBeginError
+	}
+	if p != nil {
+		if err = p.writeField0(oprot); err != nil {
+			fieldId = 0
+			goto WriteFieldError
+		}
+	}
+	if err = oprot.WriteFieldStop(); err != nil {
+		goto WriteFieldStopError
+	}
+	if err = oprot.WriteStructEnd(); err != nil {
+		goto WriteStructEndError
+	}
+	return nil
+WriteStructBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T write struct begin error: ", p), err)
+WriteFieldError:
+	return thrift.PrependError(fmt.Sprintf("%T write field %d error: ", p, fieldId), err)
+WriteFieldStopError:
+	return thrift.PrependError(fmt.Sprintf("%T write field stop error: ", p), err)
+WriteStructEndError:
+	return thrift.PrependError(fmt.Sprintf("%T write struct end error: ", p), err)
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockResult) writeField0(oprot thrift.TProtocol) (err error) {
+	if p.IsSetSuccess() {
+		if err = oprot.WriteFieldBegin("success", thrift.STRUCT, 0); err != nil {
+			goto WriteFieldBeginError
+		}
+		if err := p.Success.Write(oprot); err != nil {
+			return err
+		}
+		if err = oprot.WriteFieldEnd(); err != nil {
+			goto WriteFieldEndError
+		}
+	}
+	return nil
+WriteFieldBeginError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 0 begin error: ", p), err)
+WriteFieldEndError:
+	return thrift.PrependError(fmt.Sprintf("%T write field 0 end error: ", p), err)
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockResult) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("CouponMetaServiceTryReduceCouponStockResult(%+v)", *p)
+
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockResult) DeepEqual(ano *CouponMetaServiceTryReduceCouponStockResult) bool {
+	if p == ano {
+		return true
+	} else if p == nil || ano == nil {
+		return false
+	}
+	if !p.Field0DeepEqual(ano.Success) {
+		return false
+	}
+	return true
+}
+
+func (p *CouponMetaServiceTryReduceCouponStockResult) Field0DeepEqual(src *TryReduceCouponStockResp) bool {
 
 	if !p.Success.DeepEqual(src) {
 		return false

@@ -77,15 +77,25 @@ struct UpdateCouponMetaResp {
     255: base.BaseResp baseResp
 }
 
-// 获取有效券模板
+// 获取有效券模板（服务之间调用）
 
-struct GetCouponValidMetaListReq {
+struct GetCouponValidMetaInfoReq {
     1: required i64 coupon_meta_no // 券模板id
 }
 
-struct GetCouponValidMetaListResp {
-    1: map<string,CouponMeta> coupon_meta_map
+struct GetCouponValidMetaInfoResp {
+    1: map<string,CouponMeta> coupon_meta_map // 废弃
+    2: CouponMeta coupon_meta_info
     255: base.BaseResp baseResp
+}
+
+// 尝试扣减库存（服务之间调用）
+struct TryReduceCouponStockReq {
+    1: required i64 coupon_meta_no // 券模板id
+}
+
+struct TryReduceCouponStockResp {
+    1: bool isSuccess
 }
 
 service CouponMetaService {
@@ -93,5 +103,6 @@ service CouponMetaService {
     AddCouponMetaResp AddCouponMeta(1: AddCouponMetaReq req) // 增加券模板
     DeleteCouponMetaResp deleteCouponMeta(1: DeleteCouponMetaReq req) // 删除券模板
     UpdateCouponMetaResp updateCouponMeta(1: UpdateCouponMetaReq req) // 更新券模板
-    GetCouponValidMetaListResp getCouponValidMetaList(1: GetCouponValidMetaListReq req) // 获取有效券模板
+    GetCouponValidMetaInfoResp getCouponValidMetaInfo(1: GetCouponValidMetaInfoReq req) // 获取有效券模板
+    TryReduceCouponStockResp TryReduceCouponStock(1: TryReduceCouponStockReq req) // 尝试扣减库存
 }

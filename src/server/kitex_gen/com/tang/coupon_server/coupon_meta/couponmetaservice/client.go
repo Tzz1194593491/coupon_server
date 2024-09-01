@@ -15,7 +15,8 @@ type Client interface {
 	AddCouponMeta(ctx context.Context, req *coupon_meta.AddCouponMetaReq, callOptions ...callopt.Option) (r *coupon_meta.AddCouponMetaResp, err error)
 	DeleteCouponMeta(ctx context.Context, req *coupon_meta.DeleteCouponMetaReq, callOptions ...callopt.Option) (r *coupon_meta.DeleteCouponMetaResp, err error)
 	UpdateCouponMeta(ctx context.Context, req *coupon_meta.UpdateCouponMetaReq, callOptions ...callopt.Option) (r *coupon_meta.UpdateCouponMetaResp, err error)
-	GetCouponValidMetaList(ctx context.Context, req *coupon_meta.GetCouponValidMetaListReq, callOptions ...callopt.Option) (r *coupon_meta.GetCouponValidMetaListResp, err error)
+	GetCouponValidMetaInfo(ctx context.Context, req *coupon_meta.GetCouponValidMetaInfoReq, callOptions ...callopt.Option) (r *coupon_meta.GetCouponValidMetaInfoResp, err error)
+	TryReduceCouponStock(ctx context.Context, req *coupon_meta.TryReduceCouponStockReq, callOptions ...callopt.Option) (r *coupon_meta.TryReduceCouponStockResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -67,7 +68,12 @@ func (p *kCouponMetaServiceClient) UpdateCouponMeta(ctx context.Context, req *co
 	return p.kClient.UpdateCouponMeta(ctx, req)
 }
 
-func (p *kCouponMetaServiceClient) GetCouponValidMetaList(ctx context.Context, req *coupon_meta.GetCouponValidMetaListReq, callOptions ...callopt.Option) (r *coupon_meta.GetCouponValidMetaListResp, err error) {
+func (p *kCouponMetaServiceClient) GetCouponValidMetaInfo(ctx context.Context, req *coupon_meta.GetCouponValidMetaInfoReq, callOptions ...callopt.Option) (r *coupon_meta.GetCouponValidMetaInfoResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.GetCouponValidMetaList(ctx, req)
+	return p.kClient.GetCouponValidMetaInfo(ctx, req)
+}
+
+func (p *kCouponMetaServiceClient) TryReduceCouponStock(ctx context.Context, req *coupon_meta.TryReduceCouponStockReq, callOptions ...callopt.Option) (r *coupon_meta.TryReduceCouponStockResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.TryReduceCouponStock(ctx, req)
 }

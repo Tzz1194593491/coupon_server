@@ -21,6 +21,7 @@ const (
 	BusinessCode_GET_FAIL         BusinessCode = 506
 	BusinessCode_UPDATE_FAIL      BusinessCode = 507
 	BusinessCode_PARAM_PARSE_FAIL BusinessCode = 508
+	BusinessCode_SEND_COUPON_FAIL BusinessCode = 509
 )
 
 func (p BusinessCode) String() string {
@@ -45,6 +46,8 @@ func (p BusinessCode) String() string {
 		return "UPDATE_FAIL"
 	case BusinessCode_PARAM_PARSE_FAIL:
 		return "PARAM_PARSE_FAIL"
+	case BusinessCode_SEND_COUPON_FAIL:
+		return "SEND_COUPON_FAIL"
 	}
 	return "<UNSET>"
 }
@@ -71,6 +74,8 @@ func BusinessCodeFromString(s string) (BusinessCode, error) {
 		return BusinessCode_UPDATE_FAIL, nil
 	case "PARAM_PARSE_FAIL":
 		return BusinessCode_PARAM_PARSE_FAIL, nil
+	case "SEND_COUPON_FAIL":
+		return BusinessCode_SEND_COUPON_FAIL, nil
 	}
 	return BusinessCode(0), fmt.Errorf("not a valid BusinessCode string")
 }
