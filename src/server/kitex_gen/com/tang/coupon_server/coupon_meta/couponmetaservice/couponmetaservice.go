@@ -41,17 +41,10 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingNone),
 	),
-	"getCouponMetaIsValid": kitex.NewMethodInfo(
-		getCouponMetaIsValidHandler,
-		newCouponMetaServiceGetCouponMetaIsValidArgs,
-		newCouponMetaServiceGetCouponMetaIsValidResult,
-		false,
-		kitex.WithStreamingMode(kitex.StreamingNone),
-	),
-	"getCouponMetaStock": kitex.NewMethodInfo(
-		getCouponMetaStockHandler,
-		newCouponMetaServiceGetCouponMetaStockArgs,
-		newCouponMetaServiceGetCouponMetaStockResult,
+	"getCouponValidMetaList": kitex.NewMethodInfo(
+		getCouponValidMetaListHandler,
+		newCouponMetaServiceGetCouponValidMetaListArgs,
+		newCouponMetaServiceGetCouponValidMetaListResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingNone),
 	),
@@ -193,40 +186,22 @@ func newCouponMetaServiceUpdateCouponMetaResult() interface{} {
 	return coupon_meta.NewCouponMetaServiceUpdateCouponMetaResult()
 }
 
-func getCouponMetaIsValidHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	realArg := arg.(*coupon_meta.CouponMetaServiceGetCouponMetaIsValidArgs)
-	realResult := result.(*coupon_meta.CouponMetaServiceGetCouponMetaIsValidResult)
-	success, err := handler.(coupon_meta.CouponMetaService).GetCouponMetaIsValid(ctx, realArg.Req)
+func getCouponValidMetaListHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	realArg := arg.(*coupon_meta.CouponMetaServiceGetCouponValidMetaListArgs)
+	realResult := result.(*coupon_meta.CouponMetaServiceGetCouponValidMetaListResult)
+	success, err := handler.(coupon_meta.CouponMetaService).GetCouponValidMetaList(ctx, realArg.Req)
 	if err != nil {
 		return err
 	}
 	realResult.Success = success
 	return nil
 }
-func newCouponMetaServiceGetCouponMetaIsValidArgs() interface{} {
-	return coupon_meta.NewCouponMetaServiceGetCouponMetaIsValidArgs()
+func newCouponMetaServiceGetCouponValidMetaListArgs() interface{} {
+	return coupon_meta.NewCouponMetaServiceGetCouponValidMetaListArgs()
 }
 
-func newCouponMetaServiceGetCouponMetaIsValidResult() interface{} {
-	return coupon_meta.NewCouponMetaServiceGetCouponMetaIsValidResult()
-}
-
-func getCouponMetaStockHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	realArg := arg.(*coupon_meta.CouponMetaServiceGetCouponMetaStockArgs)
-	realResult := result.(*coupon_meta.CouponMetaServiceGetCouponMetaStockResult)
-	success, err := handler.(coupon_meta.CouponMetaService).GetCouponMetaStock(ctx, realArg.Req)
-	if err != nil {
-		return err
-	}
-	realResult.Success = success
-	return nil
-}
-func newCouponMetaServiceGetCouponMetaStockArgs() interface{} {
-	return coupon_meta.NewCouponMetaServiceGetCouponMetaStockArgs()
-}
-
-func newCouponMetaServiceGetCouponMetaStockResult() interface{} {
-	return coupon_meta.NewCouponMetaServiceGetCouponMetaStockResult()
+func newCouponMetaServiceGetCouponValidMetaListResult() interface{} {
+	return coupon_meta.NewCouponMetaServiceGetCouponValidMetaListResult()
 }
 
 type kClient struct {
@@ -279,21 +254,11 @@ func (p *kClient) UpdateCouponMeta(ctx context.Context, req *coupon_meta.UpdateC
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) GetCouponMetaIsValid(ctx context.Context, req *coupon_meta.GetCouponMetaIsValidReq) (r *coupon_meta.GetCouponMetaIsValidResp, err error) {
-	var _args coupon_meta.CouponMetaServiceGetCouponMetaIsValidArgs
+func (p *kClient) GetCouponValidMetaList(ctx context.Context, req *coupon_meta.GetCouponValidMetaListReq) (r *coupon_meta.GetCouponValidMetaListResp, err error) {
+	var _args coupon_meta.CouponMetaServiceGetCouponValidMetaListArgs
 	_args.Req = req
-	var _result coupon_meta.CouponMetaServiceGetCouponMetaIsValidResult
-	if err = p.c.Call(ctx, "getCouponMetaIsValid", &_args, &_result); err != nil {
-		return
-	}
-	return _result.GetSuccess(), nil
-}
-
-func (p *kClient) GetCouponMetaStock(ctx context.Context, req *coupon_meta.GetCouponMetaStockReq) (r *coupon_meta.GetCouponMetaStockResp, err error) {
-	var _args coupon_meta.CouponMetaServiceGetCouponMetaStockArgs
-	_args.Req = req
-	var _result coupon_meta.CouponMetaServiceGetCouponMetaStockResult
-	if err = p.c.Call(ctx, "getCouponMetaStock", &_args, &_result); err != nil {
+	var _result coupon_meta.CouponMetaServiceGetCouponValidMetaListResult
+	if err = p.c.Call(ctx, "getCouponValidMetaList", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

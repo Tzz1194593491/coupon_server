@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/Tzz1194593491/coupon_server/cmd/coupon_meta/dal"
-	"github.com/Tzz1194593491/coupon_server/cmd/coupon_meta/utils"
+	"github.com/Tzz1194593491/coupon_server/cmd/coupon_meta/tools"
 	couponmeta "github.com/Tzz1194593491/coupon_server/kitex_gen/com/tang/coupon_server/coupon_meta/couponmetaservice"
 	"github.com/Tzz1194593491/coupon_server/pkg/constants"
 	middleware2 "github.com/Tzz1194593491/coupon_server/pkg/middleware"
@@ -15,7 +15,7 @@ import (
 
 func init() {
 	dal.Init()
-	utils.Init()
+	tools.Init()
 }
 
 func main() {

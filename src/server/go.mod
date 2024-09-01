@@ -13,6 +13,7 @@ require (
 )
 
 require (
+	github.com/allegro/bigcache/v3 v3.1.0 // indirect
 	github.com/bytedance/go-tagexpr/v2 v2.9.2 // indirect
 	github.com/bytedance/gopkg v0.0.0-20240514070511-01b2cbcf35e1 // indirect
 	github.com/bytedance/sonic v1.11.8 // indirect
